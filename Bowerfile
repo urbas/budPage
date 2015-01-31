@@ -1,0 +1,16 @@
+# A sample Bowerfile
+# Check out https://github.com/42dev/bower-rails#ruby-dsl-configuration for more options
+
+asset 'jquery'
+asset 'jquery-ui'
+asset 'angular'
+asset 'angular-ui-router'
+asset 'angular-bootstrap'
+asset 'angular-ui-sortable'
+asset 'angular-sanitize'
+asset 'angular-ui-select'
+asset 'angular-resource'
+asset 'angular-animate'
+asset 'angularjs-toaster'
+asset 'angular-ui-calendar'
+asset 'angular-ui-grid'
