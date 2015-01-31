@@ -1,0 +1,29 @@
+defaults: &defaults
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: bestresponse
+  password: bestresponse
+  host: localhost
+  port: 5432
+
+  # Schema search path. The server defaults to $user,public
+  #schema_search_path: myapp,sharedapp,public
+
+  # Minimum log levels, in increasing order:
+  #   debug5, debug4, debug3, debug2, debug1,
+  #   log, notice, warning, error, fatal, and panic
+  # The server defaults to notice.
+  #min_messages: warning
+
+development:
+  <<: *defaults
+  database: bestresponse_development
+
+test:
+  <<: *defaults
+  database: bestresponse_test
+
+production:
+  <<: *defaults
+  database: bestresponse_production
