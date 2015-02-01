@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150201165548) do
+ActiveRecord::Schema.define(version: 20150201174808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "responses", force: :cascade do |t|
+    t.integer  "user_id",                null: false
+    t.integer  "integer",                null: false
+    t.string   "content",    limit: 160, null: false
+    t.integer  "parent_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "responses", ["parent_id"], name: "index_responses_on_parent_id", using: :btree
+  add_index "responses", ["user_id"], name: "index_responses_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -34,4 +46,6 @@ ActiveRecord::Schema.define(version: 20150201165548) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "responses", "responses", column: "parent_id", on_update: :cascade, on_delete: :nullify
+  add_foreign_key "responses", "users", on_update: :cascade, on_delete: :nullify
 end
