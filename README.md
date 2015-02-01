@@ -11,10 +11,18 @@ npm install bower -g
 rake bower:install
 ```
 
+Import the main directory within IntelliJ Ultimate as a Ruby project.
+
 ## Working in production mode
 
 When executing `rake`, do the following:
 
 ```bash
 RAILS_ENV=production rake <your command>
+```
+
+For example, to create a production database, run
+```bash
+RAILS_ENV=production rake db:create db:migrate db:seed
+
 ```
