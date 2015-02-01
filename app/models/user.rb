@@ -4,6 +4,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :responses
-  has_many :opinions
+  has_many :responses, class_name: 'Response', foreign_key: :user_id
+  has_many :opinions, class_name: 'Opinion', foreign_key: :user_id
 end
