@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150201174808) do
+ActiveRecord::Schema.define(version: 20150201182219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "opinions", force: :cascade do |t|
+    t.integer  "user_id",     null: false
+    t.integer  "response_id", null: false
+    t.boolean  "value",       null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "opinions", ["response_id"], name: "index_opinions_on_response_id", using: :btree
+  add_index "opinions", ["user_id"], name: "index_opinions_on_user_id", using: :btree
 
   create_table "responses", force: :cascade do |t|
     t.integer  "user_id",                null: false
@@ -46,6 +57,8 @@ ActiveRecord::Schema.define(version: 20150201174808) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "opinions", "responses", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "opinions", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "responses", "responses", column: "parent_id", on_update: :cascade, on_delete: :nullify
   add_foreign_key "responses", "users", on_update: :cascade, on_delete: :nullify
 end
