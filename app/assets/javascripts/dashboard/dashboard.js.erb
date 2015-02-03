@@ -1,0 +1,16 @@
+var dashboardModule = angular.module("dashboard", [
+  'ui.router'
+]);
+
+dashboardModule.config(['$stateProvider', function ($stateProvider) {
+    $stateProvider
+      .state('main.dashboard', {
+        url: 'dashboard',
+        controller: 'DashboardCtrl',
+        templateUrl: "<%= asset_path('dashboard/dashboard.html') %>"
+      });
+  }]);
+
+dashboardModule.controller('DashboardCtrl', ['$scope', function ($scope) {
+  $scope.name = "World";
+}]);

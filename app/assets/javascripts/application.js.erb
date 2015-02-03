@@ -1,0 +1,30 @@
+//= require angular/angular
+//= require angular-animate/angular-animate
+//= require angularjs-toaster/toaster
+//= require angular-ui-router/release/angular-ui-router
+//= require dashboard/dashboard
+
+angular
+  .module('bestresponse', [
+    'ui.router',
+    'toaster',
+    'dashboard'
+  ])
+  .config(['$stateProvider', function ($stateProvider) {
+    $stateProvider
+      .state('main', {
+        abstract: true,
+        url: "/",
+        views: {
+          'body': {templateUrl: '<%= asset_path('main.html') %>', controller: 'MainBodyCtrl'},
+          'header': {templateUrl: '<%= asset_path('main/header.html') %>'},
+          'footer': {templateUrl: '<%= asset_path('main/footer.html') %>'}
+        }
+      });
+  }])
+  .controller('MainBodyCtrl', function () {
+  })
+  .config(['$urlRouterProvider', function ($urlRouterProvider) {
+    $urlRouterProvider.otherwise("/dashboard");
+  }])
+;
