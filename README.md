@@ -22,7 +22,13 @@ RAILS_ENV=production rake <your command>
 ```
 
 For example, to create a production database, run
-```bash
-RAILS_ENV=production rake db:create db:migrate db:seed
 
+```bash
+RAILS_ENV=production rake db:create db:migrate
+```
+
+## Re-populating the development database with sample data
+
+```bash
+rake db:truncate db:seed
 ```

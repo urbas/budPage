@@ -1,7 +1,7 @@
 class CreateResponses < ActiveRecord::Migration
   def change
     create_table :responses do |t|
-      t.integer :user_id, :integer, null: false
+      t.integer :user_id, null: false
       t.string :content, limit: 160, null: false
       t.integer :parent_id
       t.timestamps null: false
