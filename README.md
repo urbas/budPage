@@ -13,28 +13,31 @@ rake bower:install
 
 Import the main directory within IntelliJ Ultimate as a Ruby project.
 
-## Cleaning the development database
+## Development
+
+### Cleaning the development database
 
 ```bash
 rake db:drop db:create db:migrate
 ```
 
-## Re-populating the development database with sample data
+### Re-populating the development database with sample data
 
 ```bash
 rake db:truncate db:seed
 ```
 
-## Working in production mode
-
-When executing `rake`, do the following:
+### Testing
 
 ```bash
-RAILS_ENV=production rake <your command>
+RAILS_ENV=test rake db:drop db:create db:migrate
+rake test
+# or to run just tests in a single file
+rake test test/models/user_test.rb
 ```
 
-For example, to create a production database, run
+## Production
 
 ```bash
-RAILS_ENV=production rake db:create db:migrate
+RAILS_ENV=production rake db:drop db:create db:migrate
 ```
