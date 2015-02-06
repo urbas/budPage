@@ -1,0 +1,5 @@
+var responses = angular.module("responses", []);
+
+responses.factory("Response", ["$resource", function ($resource) {
+  return $resource("/responses/:id.json");
+}]);

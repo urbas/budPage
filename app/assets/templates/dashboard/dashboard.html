@@ -1,3 +1,11 @@
 <div class="dashboard">
-  Hello {{name}}!
+
+  <ul>
+    <li ng-repeat="response in responses">
+        <div class="content">
+          {{response.content}}
+        </div>
+    </li>
+  </ul>
+
 </div>

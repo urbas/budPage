@@ -1,16 +1,19 @@
 var dashboardModule = angular.module("dashboard", [
-  'ui.router'
+  'ui.router',
+  'responses',
+  'ngResource'
 ]);
 
 dashboardModule.config(['$stateProvider', function ($stateProvider) {
-    $stateProvider
-      .state('main.dashboard', {
-        url: 'dashboard',
-        controller: 'DashboardCtrl',
-        templateUrl: "<%= asset_path('dashboard/dashboard.html') %>"
-      });
-  }]);
+  $stateProvider
+    .state('main.dashboard', {
+      url: 'dashboard',
+      controller: 'DashboardCtrl',
+      templateUrl: "<%= asset_path('dashboard/dashboard.html') %>"
+    });
+}]);
 
-dashboardModule.controller('DashboardCtrl', ['$scope', function ($scope) {
+dashboardModule.controller('DashboardCtrl', ['$scope', 'Response', function ($scope, Response) {
   $scope.name = "World";
+  $scope.responses = Response.query();
 }]);
