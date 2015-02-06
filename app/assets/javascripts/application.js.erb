@@ -1,14 +1,20 @@
+//= require jquery/dist/jquery
+//= require jquery-ui/ui/jquery-ui
+//= require bootstrap
 //= require angular/angular
 //= require angular-animate/angular-animate
 //= require angularjs-toaster/toaster
+//= require angular-bootstrap/ui-bootstrap
 //= require angular-ui-router/release/angular-ui-router
 //= require dashboard/dashboard
+//= require frame/header/header
 
 angular
   .module('bestresponse', [
     'ui.router',
     'toaster',
-    'dashboard'
+    'dashboard',
+    'frame.header'
   ])
   .config(['$stateProvider', function ($stateProvider) {
     $stateProvider
@@ -16,9 +22,9 @@ angular
         abstract: true,
         url: "/",
         views: {
-          'header': {templateUrl: '<%= asset_path('main/header.html') %>'},
-          'body': {templateUrl: '<%= asset_path('main.html') %>', controller: 'MainBodyCtrl'},
-          'footer': {templateUrl: '<%= asset_path('main/footer.html') %>'}
+          'header': {templateUrl: '<%= asset_path('main/header-view.html') %>'},
+          'body': {templateUrl: '<%= asset_path('main-view.html') %>', controller: 'MainBodyCtrl'},
+          'footer': {templateUrl: '<%= asset_path('main/footer-view.html') %>'}
         }
       });
   }])

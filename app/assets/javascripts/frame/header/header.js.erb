@@ -1,0 +1,17 @@
+angular
+  .module('frame.header', [
+    'toaster',
+    'ui.bootstrap'
+  ])
+  .directive('header', function () {
+    return {
+      restrict: 'E',
+      scope: {},
+      controller: 'HeaderCtrl',
+      templateUrl: '<%= asset_path('frame/header/header.html') %>'
+    };
+  })
+  .controller('HeaderCtrl', ['$scope', function ($scope) {
+
+  }])
+;
