@@ -7,13 +7,12 @@ var dashboardModule = angular.module("dashboard", [
 dashboardModule.config(['$stateProvider', function ($stateProvider) {
   $stateProvider
     .state('main.dashboard', {
-      url: 'dashboard',
+      url: '',
       controller: 'DashboardCtrl',
       templateUrl: "<%= asset_path('dashboard/dashboard.html') %>"
     });
 }]);
 
 dashboardModule.controller('DashboardCtrl', ['$scope', 'Response', function ($scope, Response) {
-  $scope.name = "World";
   $scope.responses = Response.query();
 }]);

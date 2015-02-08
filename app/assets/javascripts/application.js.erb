@@ -25,7 +25,7 @@ angular
         url: "/",
         views: {
           'header': {templateUrl: '<%= asset_path('main/header-view.html') %>'},
-          'body': {templateUrl: '<%= asset_path('main-view.html') %>', controller: 'MainBodyCtrl'},
+          'body': {templateUrl: '<%= asset_path('main/body-view.html') %>', controller: 'MainBodyCtrl'},
           'footer': {templateUrl: '<%= asset_path('main/footer-view.html') %>'}
         }
       });
@@ -33,6 +33,6 @@ angular
   .controller('MainBodyCtrl', function () {
   })
   .config(['$urlRouterProvider', function ($urlRouterProvider) {
-    $urlRouterProvider.otherwise("/dashboard");
+    $urlRouterProvider.otherwise("/");
   }])
 ;
