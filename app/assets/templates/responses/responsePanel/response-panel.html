@@ -1,3 +1,13 @@
 <div class="responses-response-panel">
-  Tis the content: {{response.content}}
+  <div class="content"> Tis the content: {{response.content}}</div>
+  <div>
+    <span>{{response.likes}} likes, {{response.dislikes}} dislikes</span>
+    <button class="btn btn-success">Like</button>
+    <button class="btn btn-danger">Dislike</button>
+  </div>
+  <ul>
+    <li ng-repeat="childResponse in response.responses">
+      {{childResponse.content}}
+    </li>
+  </ul>
 </div>

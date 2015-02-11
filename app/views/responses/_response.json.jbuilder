@@ -1,0 +1,1 @@
+json.(response, :id, :content, :user_id, :parent_id)
