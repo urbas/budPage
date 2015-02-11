@@ -1,5 +1,23 @@
-var responses = angular.module('responses', []);
+var responses = angular.module('responses', [
+  'ui.router'
+]);
 
 responses.factory('Response', ['$resource', function ($resource) {
   return $resource('/responses/:id.json');
 }]);
+
+responses.config(['$stateProvider', function ($stateProvider) {
+  $stateProvider
+    .state('main.response', {
+      url: '/responses/{responseId:int}',
+      controller: "ResponseCtrl",
+      templateUrl: "<%= asset_path('responses/response.html') %>"
+    });
+}]);
+
+responses.controller("ResponseCtrl", ['$scope', '$state', '$stateParams', 'Response', 'toaster',
+  function ($scope, $state, $stateParams, Response, toaster) {
+    console.log("Getting response: " + $stateParams.responseId);
+    $scope.response = Response.get({id: $stateParams.responseId});
+  }
+]);
