@@ -1,0 +1,13 @@
+var responsePanel = angular.module('responses.responsePanel', []);
+
+responsePanel.directive('responsePanel', function () {
+  return {
+    restrict: 'E',
+    scope: {
+      response: "=response"
+    },
+    controller: ['$scope', function ($scope) {
+    }],
+    templateUrl: "<%= asset_path('responses/responsePanel/response-panel.html') %>"
+  };
+});

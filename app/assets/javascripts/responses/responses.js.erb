@@ -1,5 +1,8 @@
+//= require responses/responsePanel/responsePanel
+
 var responses = angular.module('responses', [
-  'ui.router'
+  'ui.router',
+  'responses.responsePanel'
 ]);
 
 responses.factory('Response', ['$resource', function ($resource) {
