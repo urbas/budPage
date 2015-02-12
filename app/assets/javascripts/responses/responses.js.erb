@@ -22,7 +22,6 @@ responses.config(['$stateProvider', function ($stateProvider) {
 
 responses.controller("ResponseCtrl", ['$scope', '$state', '$stateParams', 'Response', 'toaster',
   function ($scope, $state, $stateParams, Response, toaster) {
-    console.log("Getting response: " + $stateParams.responseId);
     $scope.response = Response.getFamily({id: $stateParams.responseId});
   }
 ]);

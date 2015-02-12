@@ -1,13 +1,27 @@
 <div class="responses-response-panel">
-  <div class="content"> Tis the content: {{response.content}}</div>
   <div>
-    <span>{{response.likes}} likes, {{response.dislikes}} dislikes</span>
-    <button class="btn btn-success">Like</button>
-    <button class="btn btn-danger">Dislike</button>
+    <h3>Response:</h3>
+
+    <div class="content">{{response.content}}</div>
+    <div>
+      <span>{{response.likes}} likes, {{response.dislikes}} dislikes</span>
+      <button class="btn btn-success">Like</button>
+      <button class="btn btn-danger">Dislike</button>
+    </div>
   </div>
-  <ul>
-    <li ng-repeat="childResponse in response.responses">
-      {{childResponse.content}}
-    </li>
-  </ul>
+
+  <div ng-show="response.parent_response">
+    <h3>Response to:</h3>
+
+    <div>{{response.parent_response.content}}</div>
+  </div>
+
+  <div>
+    <h3>Responses:</h3>
+    <ul>
+      <li ng-repeat="childResponse in response.responses">
+        {{childResponse.content}}
+      </li>
+    </ul>
+  </div>
 </div>
