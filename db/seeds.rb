@@ -9,3 +9,5 @@ rok_response_to_2 = Response.create(user: rok, content: 'Your face is weather.',
 
 mat.opinions.create(response: rok_response_1, value: false)
 rok.opinions.create(response: mat_response_to_1, value: true)
+rok.opinions.create(response: rok_response_to_2, value: true)
+mat.opinions.create(response: rok_response_to_2, value: true)
