@@ -11,7 +11,15 @@ angular
       templateUrl: '<%= asset_path('frame/header.html') %>'
     };
   })
-  .controller('HeaderCtrl', ['$scope', function ($scope) {
+  .controller('HeaderCtrl', ['$scope', '$state', function ($scope, $state) {
+    $scope.navItems = [
+      { name: "About", link: "main.home" }
+    ];
 
+    $scope.isNavItemActive = function (navItem) {
+      return $state.includes(navItem.link) || !!navItem.activeUrls && navItem.activeUrls.some(function (url) {
+          return $state.includes(url);
+        });
+    };
   }])
 ;
