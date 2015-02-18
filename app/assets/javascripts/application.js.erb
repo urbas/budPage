@@ -7,21 +7,17 @@
 //= require angularjs-toaster/toaster
 //= require angular-bootstrap/ui-bootstrap
 //= require angular-ui-router/release/angular-ui-router
-//= require dashboard/dashboard
-//= require responses/responses
-//= require frame/header/header
+//= require frame/header
 
 angular
-  .module('bestresponse', [
+  .module('budpage', [
     'ui.router',
     'toaster',
-    'dashboard',
     'frame.header'
   ])
   .config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state('main', {
-        abstract: true,
         url: "/",
         views: {
           'header': {templateUrl: '<%= asset_path('main/header-view.html') %>'},

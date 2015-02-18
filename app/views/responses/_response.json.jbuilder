@@ -1,1 +1,0 @@
-json.(response, :id, :content, :user_id, :parent_id, :likes_count, :dislikes_count)

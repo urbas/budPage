@@ -2,8 +2,8 @@ defaults: &defaults
   adapter: postgresql
   encoding: unicode
   pool: 5
-  username: bestresponse
-  password: bestresponse
+  username: budpage
+  password: budpage
   host: localhost
   port: 5432
 
@@ -18,12 +18,12 @@ defaults: &defaults
 
 development:
   <<: *defaults
-  database: bestresponse_development
+  database: budpage_development
 
 test:
   <<: *defaults
-  database: bestresponse_test
+  database: budpage_test
 
 production:
   <<: *defaults
-  database: bestresponse_production
+  database: budpage_production
