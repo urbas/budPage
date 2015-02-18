@@ -1,0 +1,11 @@
+var homePage = angular.module('pages.home', [
+  'ui.router'
+]);
+
+homePage.config(['$stateProvider', function ($stateProvider) {
+  $stateProvider
+    .state('main.home', {
+      url: '',
+      templateUrl: '<%= asset_path('pages/home.html') %>'
+    });
+}]);

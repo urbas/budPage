@@ -8,16 +8,19 @@
 //= require angular-bootstrap/ui-bootstrap
 //= require angular-ui-router/release/angular-ui-router
 //= require frame/header
+//= require pages
 
 angular
   .module('budpage', [
     'ui.router',
     'toaster',
-    'frame.header'
+    'frame.header',
+    'pages'
   ])
   .config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state('main', {
+        abstract: true,
         url: "/",
         views: {
           'header': {templateUrl: '<%= asset_path('main/header-view.html') %>'},
