@@ -1,8 +1,8 @@
-var homePage = angular.module('pages.home', [
+var homePageModule = angular.module('pages.home', [
   'ui.router'
 ]);
 
-homePage.config(['$stateProvider', function ($stateProvider) {
+homePageModule.config(['$stateProvider', function ($stateProvider) {
   $stateProvider
     .state('main.home', {
       url: '',

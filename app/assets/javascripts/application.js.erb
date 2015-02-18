@@ -10,28 +10,25 @@
 //= require frame/header
 //= require pages
 
-angular
-  .module('budpage', [
-    'ui.router',
-    'toaster',
-    'frame.header',
-    'pages'
-  ])
-  .config(['$stateProvider', function ($stateProvider) {
-    $stateProvider
-      .state('main', {
-        abstract: true,
-        url: "/",
-        views: {
-          'header': {templateUrl: '<%= asset_path('main/header-view.html') %>'},
-          'body': {templateUrl: '<%= asset_path('main/body-view.html') %>', controller: 'MainBodyCtrl'},
-          'footer': {templateUrl: '<%= asset_path('main/footer-view.html') %>'}
-        }
-      });
-  }])
-  .controller('MainBodyCtrl', function () {
-  })
-  .config(['$urlRouterProvider', function ($urlRouterProvider) {
-    $urlRouterProvider.otherwise("/");
-  }])
-;
+var budPageModule = angular.module('budpage', [
+  'ui.router',
+  'toaster',
+  'frame.header',
+  'pages'
+]);
+
+budPageModule.config(['$stateProvider', function ($stateProvider) {
+  $stateProvider.state('main', {
+    abstract: true,
+    url: "/",
+    views: {
+      'header': {templateUrl: '<%= asset_path('main/header-view.html') %>'},
+      'body': {templateUrl: '<%= asset_path('main/body-view.html') %>'},
+      'footer': {templateUrl: '<%= asset_path('main/footer-view.html') %>'}
+    }
+  });
+}]);
+
+budPageModule.config(['$urlRouterProvider', function ($urlRouterProvider) {
+  $urlRouterProvider.otherwise("/");
+}]);
