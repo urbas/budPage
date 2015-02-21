@@ -1,0 +1,3 @@
+Cmnd_Alias SERVICE = /sbin/start , /sbin/stop
+
+budpage ALL=(root) NOPASSWD:SERVICE
