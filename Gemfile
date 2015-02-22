@@ -10,7 +10,6 @@ gem 'activerecord-session_store'
 gem 'bower-rails'
 gem 'paperclip'
 
-gem 'sass-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
@@ -26,8 +25,6 @@ gem 'mail'
 gem 'unicode'
 
 gem 'multi_json'
-
-gem 'bootstrap-sass', '>= 3.3.1'
 
 gem 'valid_email'
 
