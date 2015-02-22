@@ -1,31 +1,38 @@
 source 'https://rubygems.org'
 
+gem 'rails', '>= 4.0.0'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails'
-# Use SCSS for stylesheets
+gem 'tzinfo-data'
+
+gem 'amoeba'
+gem 'pg'
+gem 'activerecord-session_store'
+gem 'bower-rails'
+gem 'paperclip'
+
 gem 'sass-rails'
-gem 'bootstrap-sass', '>= 3.3.1'
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier'
+gem 'uglifier', '>= 1.3.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
 
-gem 'pg'
-gem 'activerecord-session_store'
-gem 'devise'
-gem 'bower-rails'
-
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder'
-# bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', group: :doc
 
 # Use ActiveModel has_secure_password
-gem 'bcrypt'
+gem 'bcrypt-ruby', '>= 3.0.0'
 
-# Use Unicorn as the app server
-# gem 'unicorn'
+gem 'mail'
+gem 'unicode'
+
+gem 'multi_json'
+
+gem 'bootstrap-sass', '>= 3.3.1'
+
+gem 'valid_email'
+
+# Authentication & Authorisation
+gem 'devise'
 
 # Deployment
 group :development do
@@ -35,13 +42,15 @@ group :development do
   gem 'capistrano-rails'
 end
 
-group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
-
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console'
+group :doc do
+  # bundle exec rake doc:rails generates the API under doc/api.
+  gem 'sdoc', require: false
 end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+group :test do
+  gem 'minitest'
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'factory_girl_rails'
+  gem 'factory_girl'
+end
