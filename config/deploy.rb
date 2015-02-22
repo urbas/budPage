@@ -76,18 +76,18 @@ namespace :deploy do
     end
   end
 
-  # task :bower_install do
-  #   on roles(:app) do
-  #     within release_path do
-  #       with rails_env: fetch(:rails_env) do
-  #         execute :rake, "bower:install"
-  #       end
-  #     end
-  #   end
-  # end
+  task :bower_install do
+    on roles(:app) do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, "bower:install:deployment"
+        end
+      end
+    end
+  end
 end
 
-# before("deploy:compile_assets", "deploy:bower_install")
+before("deploy:compile_assets", "deploy:bower_install")
 after("deploy:compile_assets", "deploy:build_missing_paperclip_styles")
 
 namespace :deploy do
