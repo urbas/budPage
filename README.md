@@ -44,3 +44,10 @@ RAILS_ENV=production rake db:drop db:create db:migrate
 
 ## Installing rbenv
 
+Follow: https://github.com/sstephenson/rbenv#installation
+
+Install the ruby-build plugin.
+
+Now install bundler:
+
+    gem install bundler
