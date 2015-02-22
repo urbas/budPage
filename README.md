@@ -41,3 +41,6 @@ rake test test/models/user_test.rb
 ```bash
 RAILS_ENV=production rake db:drop db:create db:migrate
 ```
+
+## Installing rbenv
+

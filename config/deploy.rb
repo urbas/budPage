@@ -2,7 +2,7 @@
 lock '3.3.5'
 
 set :application, 'budpage'
-set :repo_url, 'https://bitbucket.org/urbas/budpage'
+set :repo_url, 'git@bitbucket.org:urbas/budpage.git'
 
 # rbenv
 set :rbenv_type, :user
@@ -15,7 +15,7 @@ role :db, %w{budpage@54.154.215.159}
 
 server '54.154.215.159', user: 'budpage', roles: %w{web app db}
 
-set :ssh_options, {user: 'budpage',
+set :ssh_options, {user: 'urbas',
                    keys: [ENV['HOME'] + '/.ssh/budpage_id_rsa'],
                    forward_agent: false,
                    auth_methods: %w(publickey)}
