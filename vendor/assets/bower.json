@@ -1,0 +1,19 @@
+{
+  "name": "dsl-generated dependencies",
+  "dependencies": {
+    "jquery": "latest",
+    "jquery-ui": "latest",
+    "angular": "latest",
+    "angular-ui-router": "latest",
+    "angular-bootstrap": "latest",
+    "angular-ui-sortable": "latest",
+    "angular-sanitize": "latest",
+    "angular-ui-select": "latest",
+    "angular-resource": "latest",
+    "angular-animate": "latest",
+    "angularjs-toaster": "latest",
+    "angular-ui-calendar": "latest",
+    "angular-ui-grid": "latest",
+    "bootstrap": "latest"
+  }
+}

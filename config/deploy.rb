@@ -44,7 +44,7 @@ set :ssh_options, {user: 'urbas',
 
 # Default value for linked_dirs is []
 # set :linked_dirs, fetch(:linked_dirs, []).push('bin', 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
-# set :linked_dirs, fetch(:linked_dirs, []).push('public/system')
+set :linked_dirs, fetch(:linked_dirs, []).push('vendor/assets')
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -75,8 +75,19 @@ namespace :deploy do
       end
     end
   end
+
+  task :bower_install do
+    on roles(:app) do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, "bower:install"
+        end
+      end
+    end
+  end
 end
 
+before("deploy:compile_assets", "deploy:bower_install")
 after("deploy:compile_assets", "deploy:build_missing_paperclip_styles")
 
 namespace :deploy do
