@@ -14,6 +14,8 @@
 /out/
 
 # Ignore bower files
+vendor/assets/.bowerrc
+vendor/assets/bower.json
 vendor/assets/bower_components
 
 # IntelliJ
