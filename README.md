@@ -51,3 +51,11 @@ Install the ruby-build plugin.
 Now install bundler:
 
     gem install bundler
+
+Install ze nice things:
+
+    sudo apt-get install libpq-dev
+
+Now install ze gems:
+
+    bundle install
