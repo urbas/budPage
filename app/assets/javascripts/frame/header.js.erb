@@ -15,7 +15,8 @@ frameHeaderModule.directive('header', function () {
 
 frameHeaderModule.controller('HeaderCtrl', ['$scope', '$state', function ($scope, $state) {
   $scope.navItems = [
-    {name: "About", link: "main.home"}
+    {name: "About", link: "main.home"},
+    {name: "Licence", link: "main.licence"}
   ];
 
   $scope.isNavItemActive = function (navItem) {

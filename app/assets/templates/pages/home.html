@@ -1,49 +1,101 @@
-<div class="container-fluid pages-home">
-  <div class="row">
+<div class="pages-home">
+  <div class="jumbotron">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12">
 
-    <div class="col-lg-4">
-      <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-           alt="Placeholder" style="width: 140px; height: 140px;" class="img-circle"/>
+          <h2>Bud</h2>
 
-      <h2>Heading</h2>
-
-      <p>
-        Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies
-        vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus
-        magna.
-      </p>
-
-      <p><a role="button" class="btn btn-default">View details &raquo;</a></p>
+          <p>
+            The build tool without the "ill".
+          </p>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <div class="col-lg-4">
-      <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-           alt="Placeholder" style="width: 140px; height: 140px;" class="img-circle"/>
+  <div class="container-fluid installation">
+    <div class="row">
+      <div class="col-lg-12">
+        <h3>Installation</h3>
 
-      <h2>Heading</h2>
+        <p>
+          Get it through <a href="https://chocolatey.org/packages/bud">Chocolatey</a>!
+        </p>
 
-      <p>
-        Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies
-        vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus
-        magna.
-      </p>
-
-      <p><a role="button" class="btn btn-default">View details &raquo;</a></p>
+        <div class="alert alert-warning">
+          <span class="label label-warning">Warning!</span> Bud is totally pre-alpha. No guarantees, many missing features, but a with lot of awesome!
+        </div>
+      </div>
     </div>
+  </div>
 
-    <div class="col-lg-4">
-      <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-           alt="Placeholder" style="width: 140px; height: 140px;" class="img-circle"/>
+  <div class="container-fluid super-trio">
+    <div class="row">
 
-      <h2>Heading</h2>
+      <div class="col-lg-4">
+        <h2>Define your builds in C#</h2>
 
-      <p>
-        Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies
-        vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus
-        magna.
-      </p>
+        <p>
+          For simplest projects you don't even need anything. Just put your C# code into <code>src/main/cs</code> and
+          run <code>bud</code>.
+        </p>
 
-      <p><a role="button" class="btn btn-default">View details &raquo;</a></p>
+        <p>
+          Here's the project definition of Bud itself:
+        </p>
+
+<pre>
+using Bud;
+using Bud.CSharp;
+using Bud.Projects;
+using Bud.Publishing;
+using System.IO;
+
+public class Build : IBuild {
+  public Settings Setup(Settings settings, string baseDir) {
+    return settings
+      .Version("0.0.2")
+      .Globally(CSharpKeys.TargetFramework.Init(Framework.Net46))
+      .Project("bud", Path.Combine(baseDir, "bud"), Cs.Exe(
+        Cs.Dependency("Bud.Core")
+      ))
+      .Project("Bud.Core", Path.Combine(baseDir, "Core"), Cs.Dll(
+        Cs.Dependency("Microsoft.Bcl.Immutable"),
+        Cs.Dependency("Newtonsoft.Json"),
+        Cs.Dependency("NuGet.Core")
+      ), Cs.Test(
+        Cs.Dependency("NUnit")
+      ))
+      .Project("Bud.Test", Path.Combine(baseDir, "Test"), Cs.Dll(
+        Cs.Dependency("Bud.Core"),
+        Cs.Dependency("NUnit")
+      ))
+      .Project("Bud.SystemTests", Path.Combine(baseDir, "SystemTests"), Cs.Test(
+        Cs.Dependency("Bud.Test")
+      ));
+  }
+}
+</pre>
+      </div>
+
+      <div class="col-lg-4">
+        <h2>Automate all your processes</h2>
+
+        <p>
+          From downloading dependencies, compiling your code, testing, deployment, releases. You name it. Now you can do
+          it with Bud. Just write some C#.
+        </p>
+      </div>
+
+      <div class="col-lg-4">
+        <h2>Super fast and modern</h2>
+
+        <p>
+          Bud is not only super fast (i.e.: as fast as a normal .NET application). Bud is also an accumulation of many
+          great concepts used in other modern build tools.
+        </p>
+      </div>
     </div>
   </div>
 </div>

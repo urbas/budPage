@@ -1,16 +1,26 @@
-.pages-home {
-    margin-top: 100px;
+.pages-home .jumbotron {
+    margin-bottom: 0;
+}
+
+.pages-home .jumbotron h2 {
+    font-weight: 300;
 }
 
 .pages-home .col-lg-4 {
     margin-bottom: 20px;
-    text-align: center;
-}
-.pages-home h2 {
-    font-weight: 300;
 }
 
-.pages-home .col-lg-4 p {
+.pages-home .super-trio h2 {
+    font-weight: 300;
+    text-align: center;
+}
+
+.pages-home .super-trio  p {
     margin-right: 10px;
     margin-left: 10px;
+    text-align: center;
+}
+
+.pages-home .installation {
+    background-color: #eff6ef;
 }

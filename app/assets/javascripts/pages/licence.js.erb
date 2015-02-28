@@ -1,0 +1,7 @@
+var licencePageModule = angular.module('pages.licence', [
+  'ui.router'
+]);
+
+licencePageModule.config(['$stateProvider', function ($stateProvider) {
+  $stateProvider.state('main.licence', { url: 'licence', templateUrl: '<%= asset_path('pages/licence.html') %>' });
+}]);
