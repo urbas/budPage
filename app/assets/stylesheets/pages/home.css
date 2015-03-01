@@ -1,5 +1,7 @@
 .pages-home .jumbotron {
     margin-bottom: 0;
+    padding-bottom: 50px;
+    padding-top: 60px;
 }
 
 .pages-home h2 {
@@ -14,12 +16,16 @@
     text-align: center;
 }
 
+.pages-home .super-trio {
+    padding-bottom: 40px;
+    padding-top: 40px;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    background-color: #f9f9f9;
+}
+
 .pages-home .super-trio  p {
     margin-right: 10px;
     margin-left: 10px;
     text-align: center;
-}
-
-.pages-home .separator {
-    border-bottom: 1px solid #ccc;
 }
