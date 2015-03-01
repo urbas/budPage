@@ -36,49 +36,12 @@
     <div class="row">
 
       <div class="col-lg-4">
-        <h2>Define your builds in C#</h2>
+        <h2>Minimal setup</h2>
 
         <p>
           For simplest projects you don't even need anything. Just put your C# code into <code>src/main/cs</code> and
-          run <code>bud</code>.
+          run <code>bud</code>. This will compile your code and generate an EXE file.
         </p>
-
-        <p>
-          Here's the project definition of Bud itself:
-        </p>
-
-<pre>
-using Bud;
-using Bud.CSharp;
-using Bud.Projects;
-using Bud.Publishing;
-using System.IO;
-
-public class Build : IBuild {
-  public Settings Setup(Settings settings, string baseDir) {
-    return settings
-      .Version("0.0.2")
-      .Globally(CSharpKeys.TargetFramework.Init(Framework.Net46))
-      .Project("bud", Path.Combine(baseDir, "bud"), Cs.Exe(
-        Cs.Dependency("Bud.Core")
-      ))
-      .Project("Bud.Core", Path.Combine(baseDir, "Core"), Cs.Dll(
-        Cs.Dependency("Microsoft.Bcl.Immutable"),
-        Cs.Dependency("Newtonsoft.Json"),
-        Cs.Dependency("NuGet.Core")
-      ), Cs.Test(
-        Cs.Dependency("NUnit")
-      ))
-      .Project("Bud.Test", Path.Combine(baseDir, "Test"), Cs.Dll(
-        Cs.Dependency("Bud.Core"),
-        Cs.Dependency("NUnit")
-      ))
-      .Project("Bud.SystemTests", Path.Combine(baseDir, "SystemTests"), Cs.Test(
-        Cs.Dependency("Bud.Test")
-      ));
-  }
-}
-</pre>
       </div>
 
       <div class="col-lg-4">
@@ -97,6 +60,51 @@ public class Build : IBuild {
           Bud is not only super fast (i.e.: as fast as a normal .NET application). Bud is also an accumulation of many
           great concepts used in other modern build tools.
         </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="separator"></div>
+
+  <div class="container-fluid description">
+    <div class="row">
+      <div class="col-xs-12">
+
+        <h2>Define your builds in C#</h2>
+
+        <p>
+          You can configure your build in the file <code>./bud/Build.cs</code>.
+        </p>
+
+        <p>
+          Here's an example of a <code>Build.cs</code> file, where we define a
+          simple EXE project with a NuGet dependency:
+        </p>
+
+<pre>
+using Bud;
+using Bud.CSharp;
+using Bud.Projects;
+
+public class Build : IBuild {
+  public Settings Setup(Settings settings, string baseDir) {
+    return settings.Project("Foo", baseDir, Cs.Exe(
+        Cs.Dependency("Newtonsoft.Json")
+    ));
+  }
+}
+</pre>
+
+        <p>
+          Now place your C# sources into the <code>src/main/cs</code> folder and start coding.
+        </p>
+
+        <p>
+          If you now invoke <code>bud.exe</code> in the root directory of your project, Bud will
+          compile your code and produce the executable <code>Foo.exe</code> in the folder
+          <code>.bud/output/main/cs/debug/bin</code>.
+        </p>
+
       </div>
     </div>
   </div>

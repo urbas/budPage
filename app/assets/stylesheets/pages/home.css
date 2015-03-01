@@ -2,7 +2,7 @@
     margin-bottom: 0;
 }
 
-.pages-home .jumbotron h2 {
+.pages-home h2 {
     font-weight: 300;
 }
 
@@ -11,7 +11,6 @@
 }
 
 .pages-home .super-trio h2 {
-    font-weight: 300;
     text-align: center;
 }
 
@@ -21,6 +20,6 @@
     text-align: center;
 }
 
-.pages-home .installation {
-    background-color: #eff6ef;
+.pages-home .separator {
+    border-bottom: 1px solid #ccc;
 }
