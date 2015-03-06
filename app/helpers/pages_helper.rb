@@ -6,6 +6,7 @@ module PagesHelper
     unless defined? @pages
       @pages = [
           {name: 'About', url: pages_path(:about)},
+          {name: 'Guide', url: pages_path(:guide)},
           {name: 'Licence', url: pages_path(:licence)},
           {name: 'Contact', url: pages_path(:contact)}
       ]

@@ -1,0 +1,151 @@
+<div class="pages-guide">
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-xs-12">
+        <h1 class="slim-font">Guide</h1>
+
+
+
+        <h2>Installation</h2>
+
+        <h3 class="slim-font">Windows</h3>
+
+        <p>
+          You can install Bud via <a href="https://chocolatey.org/packages/bud">Chocolatey</a>.
+          Use this command:
+        </p>
+
+        <pre><code>choco install bud</code></pre>
+
+        <p>
+          Verify that your installation succeeded by running <code>bud</code> in the command prompt.
+        </p>
+
+        <h3 class="slim-font">Linux</h3>
+
+        <p>
+          <span class="label label-warning">TODO</span>
+        </p>
+
+        <h3 class="slim-font">OS X</h3>
+
+        <p>
+          <span class="label label-warning">TODO</span>
+        </p>
+
+
+
+        <h2>Usage</h2>
+
+
+
+        <h3 class="slim-font">Creating a new project</h3>
+
+        <p>
+          Say the name of your project is <code>Foo</code>.
+          Create the <code>Foo</code> directory, and place your C# sources into
+          <code>Foo/src/main/cs</code>.
+        </p>
+
+
+
+        <h3 class="slim-font">Building the project</h3>
+
+        <div class="panel panel-success">
+          <div class="panel-heading">
+            <h3 class="panel-title">Task:</h3>
+          </div>
+
+          <div class="panel-body">
+            <pre><code>build</code></pre>
+          </div>
+        </div>
+
+        <p>
+          Run <code>bud build</code> in the <code>Foo</code> directory. This will produce the
+          executable for your project in <code>.bud/output/main/cs/debug/bin/Foo.exe</code>.
+        </p>
+
+        <div class="alert alert-info">
+          <span class="label label-primary">Note:</span> Bud invokes the <code>build</code> task
+          by default (if you run Bud without any command line arguments).
+        </div>
+
+
+
+        <h3 class="slim-font">Testing the project</h3>
+
+        <div class="panel panel-success">
+          <div class="panel-heading">
+            <h3 class="panel-title">Task:</h3>
+          </div>
+
+          <div class="panel-body">
+            <pre><code>test</code></pre>
+          </div>
+        </div>
+
+        <div class="label label-warning">TODO</div>
+
+
+
+        <h3 class="slim-font">Cleaning the project</h3>
+
+        <div class="panel panel-success">
+          <div class="panel-heading">
+            <h3 class="panel-title">Task:</h3>
+          </div>
+
+          <div class="panel-body">
+            <pre><code>clean</code></pre>
+          </div>
+        </div>
+
+        <p>
+          Run <code>bud clean</code> to clean the files in the
+          <code>.bud/output</code> folder.
+        </p>
+
+
+
+        <h3 class="slim-font">Opening the project in Visual Studio</h3>
+
+        <div class="panel panel-success">
+          <div class="panel-heading">
+            <h3 class="panel-title">Task:</h3>
+          </div>
+
+          <div class="panel-body">
+            <pre><code>generateSolution</code></pre>
+          </div>
+        </div>
+
+        <p>
+          Run <code>bud generateSolution</code> to generate a Visual Studio solution for
+          your project. Bud will place the solution file <code>Foo.sln</code> into the root
+          directory of your project. Bud will also generate multiple CsProj files in
+          <code>src/[scope]/cs</code> folders.
+        </p>
+
+
+
+        <h3 class="slim-font">Publishing the project to NuGet</h3>
+
+        <div class="panel panel-success">
+          <div class="panel-heading">
+            <h3 class="panel-title">Task:</h3>
+          </div>
+
+          <div class="panel-body">
+            <pre><code>publish</code></pre>
+          </div>
+        </div>
+
+        <div class="label label-warning">TODO</div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
