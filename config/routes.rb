@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  root to: 'application#home'
+  root to: 'pages#home'
 
   get ':page', to: 'pages#page', as: :pages
 
