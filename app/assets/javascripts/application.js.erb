@@ -1,34 +1,3 @@
 //= require jquery/dist/jquery
-//= require jquery-ui/ui/jquery-ui
-//= require bootstrap
-//= require angular/angular
-//= require angular-resource/angular-resource
-//= require angular-animate/angular-animate
-//= require angularjs-toaster/toaster
-//= require angular-bootstrap/ui-bootstrap
-//= require angular-ui-router/release/angular-ui-router
-//= require frame/header
-//= require pages
-
-var budPageModule = angular.module('budpage', [
-  'ui.router',
-  'toaster',
-  'frame.header',
-  'pages'
-]);
-
-budPageModule.config(['$stateProvider', function ($stateProvider) {
-  $stateProvider.state('main', {
-    abstract: true,
-    url: "/",
-    views: {
-      'header': {templateUrl: '<%= asset_path('main/header-view.html') %>'},
-      'body': {templateUrl: '<%= asset_path('main/body-view.html') %>'},
-      'footer': {templateUrl: '<%= asset_path('main/footer-view.html') %>'}
-    }
-  });
-}]);
-
-budPageModule.config(['$urlRouterProvider', function ($urlRouterProvider) {
-  $urlRouterProvider.otherwise("/");
-}]);
+//= require jquery-ui/jquery-ui
+//= require bootstrap/dist/js/bootstrap

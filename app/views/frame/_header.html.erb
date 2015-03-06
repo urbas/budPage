@@ -9,13 +9,15 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" ui-sref="{{navItems[0].link}}">Bud</a>
+        <a class="navbar-brand" href="<%= pages[0][:url] %>">Bud</a>
       </div>
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-          <li ng-repeat="navItem in navItems" ng-class="{active: isNavItemActive(navItem)}" ng-show="!navItem.showPredicate || navItem.showPredicate()">
-            <a ui-sref="{{navItem.link}}">{{navItem.name}}</a>
-          </li>
+          <% pages.each do |page| %>
+              <li class="<%= "active" if is_page_active(page) %>">
+                <a href="<%= page[:url] %>"><%= page[:name] %></a>
+              </li>
+          <% end %>
         </ul>
       </div>
     </div>

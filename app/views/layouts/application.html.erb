@@ -7,9 +7,8 @@
   <%= javascript_include_tag "application" %>
 </head>
 <body class="bud">
-<div ui-view="header"></div>
 <toaster-container></toaster-container>
-<div ui-view="body"></div>
-<div ui-view="footer"></div>
+<%= render :partial => 'frame/header' %>
+<%= yield %>
 </body>
 </html>
