@@ -9,13 +9,13 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="<%= pages[0][:url] %>">Bud</a>
+        <a class="navbar-brand" href="<%= pages[0].url %>">Bud</a>
       </div>
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
           <% pages.each do |page| %>
-              <li class="<%= "active" if is_page_active(page) %>">
-                <a href="<%= page[:url] %>"><%= page[:name] %></a>
+              <li class="<%= "active" if page.member?(params[:page]) %>">
+                <a href="<%= page.url %>"><%= page.name %></a>
               </li>
           <% end %>
         </ul>
