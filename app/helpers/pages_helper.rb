@@ -15,16 +15,11 @@ module PagesHelper
 
   end
 
-  def pages
-    unless defined? @pages
-      @pages = [
-          Page.new('About', :about),
-          Page.new('Guide', :guide),
-          Page.new('Licence', :licence),
-          Page.new('Contact', :contact)
-      ]
-    end
-    @pages
-  end
+  PAGES = [
+      Page.new('About', :about),
+      Page.new('Guide', :guide),
+      Page.new('Licence', :licence),
+      Page.new('Contact', :contact)
+  ]
 
 end
