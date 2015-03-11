@@ -1,18 +1,14 @@
 module PagesHelper
 
   Page = Struct.new(:name, :route_name) do
-
-    include Rails.application.routes.url_helpers
-
     def url
-      pages_path(route_name)
+      Rails.application.routes.url_helpers.pages_path(route_name)
     end
 
     def member?(route_name)
       current_page_url = Rails.application.routes.url_for(controller: :pages, action: :page, page: route_name, only_path: true)
       current_page_url.starts_with?(url)
     end
-
   end
 
   PAGES = [

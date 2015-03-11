@@ -58,6 +58,30 @@
         </div>
 
 
+        <h3 class="slim-font">Customising the build</h3>
+
+        <p>
+          To customise your builds, create the build configuration file
+          <code>.bud/Build.cs</code>. If this file does not exist, Bud assumes some
+          defaults. The following build configuration is equivalent to the default one.
+        </p>
+
+        <pre><code>using Bud;
+using Bud.CSharp;
+using Bud.Projects;
+using System.IO;
+
+public class Build : IBuild {
+  public Settings Setup(Settings settings, string baseDir) {
+    return settings.Project(Path.GetFileName(dirOfProjectToBeBuilt), baseDir, Cs.Exe(), Cs.Test());
+  }
+}</code></pre>
+
+        <p>
+          Call methods on the <code>settings</code> object to customise your build configuration.
+        </p>
+
+
         <h3 class="slim-font">Building</h3>
 
         <div class="panel panel-success">
@@ -131,9 +155,16 @@
         <p>
           Run <code>bud generateSolution</code> to generate a Visual Studio solution for
           your project. Bud will place the solution file <code>Foo.sln</code> into the root
-          directory of your project. Bud will also generate multiple CsProj files in
+          directory of your project. Bud will also generate multiple csproj files in
           <code>src/[scope]/cs</code> folders.
         </p>
+
+        <p>
+          The following command will generate solution files for the build-level sources (i.e., to be able to edit the
+          <code>.bud/Build.cs</code> file in an IDE):
+        </p>
+
+        <pre><code>bud -b generateSolution</code></pre>
 
 
         <h3 class="slim-font">Publishing to NuGet</h3>
@@ -167,20 +198,13 @@
         <h3 class="slim-font">Setting the version of your project</h3>
 
         <p>
-          You can specify the version of your project in the <code>.bud/Build.cs</code> file.
-          Here's an example:
+          This is how you specify the version of your project in the <code>.bud/Build.cs</code> file:
         </p>
 
-        <pre>
-          <code>
-
-          </code>
-        </pre>
-
-        <div class="alert alert-warning">
-          <span class="label label-warning">TODO:</span> Documentation missing.
-        </div>
-
+        <ol>
+          <li>First add the <code>using Bud.Projects;</code> directive to the top of the file.</li>
+          <li>Then call <code>settings.Version("1.2.3")</code> in your <code>IBuild</code> class.</li>
+        </ol>
 
         <h3 class="slim-font">Specifying dependencies</h3>
 
