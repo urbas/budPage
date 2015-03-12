@@ -62,8 +62,9 @@
 
         <p>
           To customise your builds, create the build configuration file
-          <code>.bud/Build.cs</code>. If this file does not exist, Bud assumes some
-          defaults. The following build configuration is equivalent to the default one.
+          <code>.bud/Build.cs</code>. If this file does not exist, Bud will
+          use a default build configuration.
+          The following build configuration is equivalent to the default one.
         </p>
 
         <pre><code>using Bud;
@@ -222,9 +223,20 @@ public class Build : IBuild {
 
         <h3 class="slim-font">Writing a plugin</h3>
 
-        <div class="alert alert-warning">
-          <span class="label label-warning">TODO:</span> Documentation missing.
-        </div>
+        <p>
+          Put the following into your build configuration (i.e., into the <code>.bud/Build.cs</code>
+          file):
+        </p>
+
+        <pre><code>settings.BudPlugin("Your.Plugin", baseDir)</code></pre>
+
+        <p>
+          Please use the following plugins as a reference source:
+        </p>
+
+        <ul>
+          <li><a href="https://github.com/urbas/Bud.Examples.HelloWorldPlugin">Hello world plugin</a></li>
+        </ul>
 
       </div>
     </div>
