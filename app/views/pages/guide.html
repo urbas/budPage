@@ -83,6 +83,28 @@ public class Build : IBuild {
         </p>
 
 
+        <h3 class="slim-font">Concepts</h3>
+
+        <p>
+          A build definition is a collection of key-value pairs. There are two types of keys: <code>ConfigKey</code> and
+          <code>TaskKey</code>. Every key has a path, such as <code>/project/Foo.Bar/main/cs/baseDir</code> or
+          <code>/build</code>. A value can be of any .NET type.
+        </p>
+
+        <p>
+          A value of a config key is evaluated when it is accessed for the first time. It is evaluated
+          once per lifetime of the build definition. A value of a task key is evaluated once per root-level task
+          invocation (i.e.: if a task calls another task twice, its value is evaluated once only and in the second
+          invocation the cached value is used).
+        </p>
+
+        <p>
+          The values of config keys and task keys are built-up by adding small modifiers to an instance of the
+          <code>Settings</code> class. For example, one adds a project to the build definition by calling
+          <code>settings.Project("Your.Project", projectDir, projectSetup)</code>.
+        </p>
+
+
         <h3 class="slim-font">Building</h3>
 
         <div class="panel panel-success">
@@ -165,7 +187,7 @@ public class Build : IBuild {
           <code>.bud/Build.cs</code> file in an IDE):
         </p>
 
-        <pre><code>bud -b generateSolution</code></pre>
+        <pre><code>bud -b 1 generateSolution</code></pre>
 
 
         <h3 class="slim-font">Publishing to NuGet</h3>
@@ -210,8 +232,12 @@ public class Build : IBuild {
         <h3 class="slim-font">Specifying dependencies</h3>
 
         <p>
-          Say your project <code>Foo</code> needs the <code>Newtonsoft.Json</code> library.
+          To add the <code>Newtonsoft.Json</code> library to your project
+          you must place <code>Cs.Dependency("Newtonsoft.Json")</code> into
+          the <code>.bud/Build.cs</code> like this:
         </p>
+
+        <pre><code>settings.Project("Foo.Bar", baseDir, Cs.Exe(Cs.Dependency("Newtonsoft.Json")), Cs.Test());</code></pre>
 
 
         <h3 class="slim-font">Using a plugin</h3>
