@@ -99,10 +99,24 @@ public class Build : IBuild {
         </p>
 
         <p>
-          The values of config keys and task keys are built-up by adding small modifiers to an instance of the
-          <code>Settings</code> class. For example, one adds a project to the build definition by calling
-          <code>settings.Project("Your.Project", projectDir, projectSetup)</code>.
+          You define values of config keys and task keys by building them up (i.e., you add small modifiers to a
+          <code>Settings</code> instance). For example, you can introduce your own key and value by calling
+          <code>settings.Add(MySettings.HelloWorldMessage.Init("Hello, World!"))</code>. The parameter to the
+          <code>Add</code> method is a modifier. This modifier initialises the
+          <code>HelloWorldMessage</code>
+          key with the value <code>"Hello, World!"</code> (if it has not been initialised before in <code>settings</code>).
+          You can define your own config and task keys like this:
         </p>
+
+        <pre><code>public static readonly ConfigKey&lt;string&gt; HelloWorldMessage = Key.Define("helloWorldMessage", "Prints a hello world message in the log.");</code></pre>
+
+        <pre><code>public static readonly TaskKey HelloWorld = Key.Define("helloWorld", "Prints a hello world message in the log.");</code></pre>
+
+        <div class="alert alert-info">
+          <span class="label label-primary">Note:</span> The <code>Settings</code> class is immutable. Therefore,
+          <code>settings.Add(...)</code> returns
+          a new instance instead of mutating the existing one.
+        </div>
 
 
         <h3 class="slim-font">Building</h3>
