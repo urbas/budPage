@@ -59,7 +59,7 @@ using System.IO;
 
 public class Build : IBuild {
   public Settings Setup(Settings settings, string baseDir) {
-    return settings.Project(Path.GetFileName(dirOfProjectToBeBuilt), baseDir, Cs.Exe(), Cs.Test());
+    return settings.Project(Path.GetFileName(baseDir), baseDir, Cs.Exe(), Cs.Test());
   }
 }
 ```
@@ -220,9 +220,25 @@ settings.Project("Foo.Bar", baseDir, Cs.Exe(Cs.Dependency("Newtonsoft.Json")), C
 
 ### Using a plugin
 
-<div class="alert alert-warning">
-  <span class="label label-warning">TODO:</span> Documentation missing.
-</div>
+Plugins add features to the build or modify it. For example, the [HelloWorldPlugin](https://github.com/urbas/Bud.Examples.HelloWorldPlugin)
+adds the task `helloWorld` to the build. It prints a hello message if you invoke `bud helloWorld`.
+
+Say you want to use the plugin `Bud.Example.HelloWorldPlugin` in your build. Create the file `.bud/.bud/Build.cs`
+with the following content:
+
+```
+using Bud;
+using Bud.CSharp;
+using Bud.Projects;
+
+public class Build : IBuild {
+  public Settings Setup(Settings settings, string baseDir) {
+    return settings.BuildDefinition(
+      Cs.Dependency("Bud.Example.HelloWorldPlugin")
+    );
+  }
+}
+```
 
 
 ### Writing a plugin
@@ -234,7 +250,9 @@ file):
 settings.BudPlugin("Your.Plugin", baseDir)
 ```
 
-  Please use the following plugins as a reference source:
+You'll have to publish your plugin before you'll be able to use it.
+
+Please use the following plugins as a reference source:
 
 1. [Hello world plugin](https://github.com/urbas/Bud.Examples.HelloWorldPlugin)
 
