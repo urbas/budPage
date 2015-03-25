@@ -137,6 +137,19 @@ executable for your project in `.bud/output/main/cs/debug/bin/Foo.exe`.
 </div>
 
 
+### Running executables
+
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h3 class="panel-title">Task:</h3>
+  </div>
+
+  <div class="panel-body">
+      <pre><code>run</code></pre>
+  </div>
+</div>
+
+
 ### Cleaning
 
 <div class="panel panel-success">
