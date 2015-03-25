@@ -7,7 +7,7 @@
 
 You can install Bud with [Chocolatey](https://chocolatey.org/packages/bud). Just use this command:
 
-```bash
+```language-bash
 choco install bud
 ```
 
@@ -51,7 +51,7 @@ To customise your builds, create the build configuration file `.bud/Build.cs`. I
 file does not exist, Bud will use a default build configuration. The following build
 configuration is equivalent to the default one.
 
-```csharp
+```language-csharp
 using Bud;
 using Bud.CSharp;
 using Bud.Projects;
@@ -86,7 +86,7 @@ You define values of config keys and task keys by building them up (i.e., you ad
 key with the value `"Hello, World!"` (if it has not been initialised before in `settings`).
 You can define your own config and task keys like this:
 
-```
+```language-csharp
 public static readonly ConfigKey<string> HelloWorldMessage = Key.Define("helloWorldMessage", "Prints a hello world message in the log.");
 
 public static readonly TaskKey HelloWorld = Key.Define("helloWorld", "Prints a hello world message in the log.");
@@ -172,7 +172,7 @@ directory of your project. Bud will also generate multiple csproj files in
 The following command will generate solution files for the build-level sources (i.e., to be able to edit the
 `.bud/Build.cs` file in an IDE):
 
-```
+```language-bash
 bud -b 1 generateSolution
 ```
 
@@ -213,7 +213,7 @@ To add the `Newtonsoft.Json` library to your project
 you must place `Cs.Dependency("Newtonsoft.Json")` into
 the `.bud/Build.cs` like this:
 
-```
+```language-csharp
 settings.Project("Foo.Bar", baseDir, Cs.Exe(Cs.Dependency("Newtonsoft.Json")), Cs.Test());
 ```
 
@@ -226,7 +226,7 @@ adds the task `helloWorld` to the build. It prints a hello message if you invoke
 Say you want to use the plugin `Bud.Example.HelloWorldPlugin` in your build. Create the file `.bud/.bud/Build.cs`
 with the following content:
 
-```
+```language-csharp
 using Bud;
 using Bud.CSharp;
 using Bud.Projects;
@@ -246,7 +246,7 @@ public class Build : IBuild {
 Put the following into your build configuration (i.e., into the `.bud/Build.cs`
 file):
 
-```
+```language-csharp
 settings.BudPlugin("Your.Plugin", baseDir)
 ```
 
