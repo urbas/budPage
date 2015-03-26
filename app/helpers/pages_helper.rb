@@ -13,7 +13,7 @@ module PagesHelper
       @asset_path = current_page.asset_path
       render 'markdown_page'
     else
-      render pages[0].path
+      redirect_to pages_path(all_pages[0].path)
     end
   end
 
@@ -73,9 +73,6 @@ module PagesHelper
   PAGES = new_pages(
       new_page('About', 'about'),
       new_markdown_page('Docs', 'docs', 'guide.html'),
-      new_markdown_page('Guide', 'docs/guide', 'guide.html'),
-      new_markdown_page('Concepts', 'docs/concepts', 'guide.html'),
-      new_markdown_page('Blueprints', 'docs/blueprints', 'guide.html'),
       new_page('Licence', 'licence'),
       new_page('Contact', 'contact')
   )
