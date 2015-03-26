@@ -1,21 +1,83 @@
 module PagesHelper
 
-  Page = Struct.new(:name, :route_name) do
-    def url
-      Rails.application.routes.url_helpers.pages_path(route_name)
-    end
+  Pages = Struct.new(:pages, :paths_to_pages, :page_tree)
 
-    def member?(route_name)
-      current_page_url = Rails.application.routes.url_for(controller: :pages, action: :page, page: route_name, only_path: true)
-      current_page_url.starts_with?(url)
+  Page = Struct.new(:name, :path, :path_components)
+
+  MarkdownPage = Struct.new(:name, :path, :path_components, :asset_path)
+
+  def render_page_path
+    if current_page.is_a?(Page)
+      render current_page.path
+    elsif current_page.is_a?(MarkdownPage)
+      @asset_path = current_page.asset_path
+      render 'markdown_page'
+    else
+      render pages[0].path
     end
   end
 
-  PAGES = [
-      Page.new('About', :about),
-      Page.new('Guide', :guide),
-      Page.new('Licence', :licence),
-      Page.new('Contact', :contact)
-  ]
+  def current_page
+    PagesHelper::PAGES.paths_to_pages[params[:page]]
+  end
+
+  def all_pages
+    PagesHelper::PAGES.pages
+  end
+
+  def is_page_active?(parent_page)
+    is_in_path_of?(current_page, parent_page)
+  end
+
+  def is_in_path_of?(this_page, parent_page)
+    this_page.path_components[0..(parent_page.path_components.length-1)] == parent_page.path_components
+  end
+
+  def has_sub_pages?(page)
+    all_pages.any? { |other_page| sub_page_of?(other_page, page) }
+  end
+
+  def sub_page?(page)
+    all_pages.any? { |other_page| sub_page_of?(page, other_page) }
+  end
+
+  def sub_pages(page)
+    all_pages.select { |other_page| sub_page_of?(other_page, page) }
+  end
+
+  private
+  def sub_page_of?(page, parent_page)
+    is_in_path_of?(page, parent_page) && page != parent_page
+  end
+
+  private
+  def self.path_to_components(path)
+    path.split('/').select { |x| !x.empty? }
+  end
+
+  private
+  def self.new_pages(*pages)
+    Pages.new(pages, pages.map { |page| [page.path, page] }.to_h)
+  end
+
+  private
+  def self.new_page(name, path)
+    Page.new(name, path, path_to_components(path))
+  end
+
+  private
+  def self.new_markdown_page(name, path, asset_path)
+    MarkdownPage.new(name, path, path_to_components(path), asset_path)
+  end
+
+  PAGES = new_pages(
+      new_page('About', 'about'),
+      new_markdown_page('Docs', 'docs', 'guide.html'),
+      new_markdown_page('Guide', 'docs/guide', 'guide.html'),
+      new_markdown_page('Concepts', 'docs/concepts', 'guide.html'),
+      new_markdown_page('Blueprints', 'docs/blueprints', 'guide.html'),
+      new_page('Licence', 'licence'),
+      new_page('Contact', 'contact')
+  )
 
 end

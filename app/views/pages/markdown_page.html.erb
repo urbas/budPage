@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-xs-12">
 
-        <%= Rails.application.assets['guide.html'].to_s.html_safe %>
+        <%= Rails.application.assets[@asset_path].to_s.html_safe %>
 
       </div>
     </div>
