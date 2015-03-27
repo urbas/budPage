@@ -2,16 +2,27 @@ module PagesHelper
 
   Pages = Struct.new(:pages, :paths_to_pages, :page_tree)
 
-  Page = Struct.new(:name, :path, :path_components)
+  Page = Struct.new(:name, :path, :path_components) do
+    def render_to(renderer)
+      renderer.render path
+    end
+  end
 
-  MarkdownPage = Struct.new(:name, :path, :path_components, :asset_path)
+  Path = Struct.new(:name, :path, :path_components) do
+    def render_to(renderer)
+      renderer.redirect_to renderer.pages_path(renderer.all_pages[0].path)
+    end
+  end
+
+  MarkdownPage = Struct.new(:name, :path, :path_components, :asset_path) do
+    def render_to(renderer)
+      renderer.render 'markdown_page', locals: {asset_path: asset_path}
+    end
+  end
 
   def render_page_path
-    if current_page.is_a?(Page)
-      render current_page.path
-    elsif current_page.is_a?(MarkdownPage)
-      @asset_path = current_page.asset_path
-      render 'markdown_page'
+    if current_page
+      current_page.render_to(self)
     else
       redirect_to pages_path(all_pages[0].path)
     end
@@ -66,13 +77,20 @@ module PagesHelper
   end
 
   private
+  def self.new_path(name, path)
+    Path.new(name, path, path_to_components(path))
+  end
+
+  private
   def self.new_markdown_page(name, path, asset_path)
     MarkdownPage.new(name, path, path_to_components(path), asset_path)
   end
 
   PAGES = new_pages(
       new_page('About', 'about'),
-      new_markdown_page('Docs', 'docs', 'guide.html'),
+      new_path('Docs', 'docs'),
+      new_markdown_page('Introduction', 'docs/introduction', 'introduction.html'),
+      new_markdown_page('Guide', 'docs/guide', 'guide.html'),
       new_page('Licence', 'licence'),
       new_page('Contact', 'contact')
   )
