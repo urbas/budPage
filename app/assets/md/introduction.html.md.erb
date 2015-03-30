@@ -1,32 +1,31 @@
 # Introduction
 
 <div class="alert alert-info">
-  <span class="label label-primary">Note:</span> This is an outline of concepts in Bud. Use
-  <a href="<%= Rails.application.routes.url_helpers.pages_path('docs/guide') %>">the guide</a>
-  if you simply want to start using Bud (without going into nitty-gritty details).
+  <span class="label label-primary">Note:</span> This document describes Bud's architecture.
+  Use <a href="<%= Rails.application.routes.url_helpers.pages_path('docs/guide') %>">the guide</a>
+  if you want to start using Bud without going into nitty-gritty details.
 </div>
 
-Bud is a build tool. It takes care of your C# projects. Bud will fetch the
-projects' dependencies, build, run, test, package, and publish them for you.
+Bud is a build tool. It takes care of your C# projects. Bud is all about automating
+build-related processes. For example, Bud will fetch the dependencies of your projects,
+build the projects, run, test, package, and publish them for you. You can also customise
+your processes through normal C# code.
 
 In the simplest case, you don't have to configure Bud at all. Just place
-some C# files in the `Your.Project/src/main/cs` folder and invoke
-`bud run` in the `Your.Project` folder.
+some C# files in the `Your.Project/src/main/cs` folder and invoke `bud run`.
 
-Bud's configuration is written in C#. No XMLs or DSLs, just a plain C# file
-that you place into `Your.Project/.bud/Build.cs`. In this file you can
-specify multiple project, their dependencies, and add other customisations
+Bud's configuration is written in C#. No XMLs or DSLs, just a plain C# file:
+`Your.Project/.bud/Build.cs`. In this file you can
+specify multiple projects, their dependencies, and add other customisations
 to the build process.
-
-Bud is both a command line tool as well as a library. On the one hand, you can use it
-to automate build tasks for your .NET projects. On the other hand, you can use it to
-query information about projects and programmatically execute build-related tasks from
-your .NET applications.
 
 ## Concepts
 
-Bud expects to find a class called `Build` in your `Your.Project/.bud/Build.cs` file.
-This class must implement the `Bud.IBuild` interface:
+### The `Build` class
+
+Bud expects you to write a class called `Build` in your `Your.Project/.bud/Build.cs` file.
+This class defines your entire build. The only requirement is that it must implement the
+`Bud.IBuild` interface:
 
 ```language-csharp
 namespace Bud {
@@ -36,10 +35,34 @@ namespace Bud {
 }
 ```
 
-The role of the `Build` class is to return a `Settings` instance. This instance contains
-the definition of your build
+Bud will compile the `Build.cs` file and create a DLL. This DLL is from then on loaded when you
+run Bud. Execution of the build is therefore as swift as executing regular C# code.
+Here's how a simple `Build.cs` file looks like:
 
-A build definition is a collection of key-value pairs. There are two types of keys: `ConfigKey` and
+```language-csharp
+using Bud;
+using Bud.CSharp;
+using Bud.Projects;
+
+public class Build : IBuild {
+  public Settings Setup(Settings settings, string baseDir) {
+    var projectFoo = new Project("Foo", baseDir, Cs.Exe());
+    return settings.Add(projectFoo);
+  }
+}
+```
+
+The particular example above adds an executable project, called Foo, to the build. 
+You can now place some C# files into the `src/main/cs` folder and then invoke
+`bud run`. This will compile your C# files, create the `Foo.exe` executable, and
+run it.
+
+
+### The `Settings` class
+
+### Build definition
+
+A __build definition__ is a collection of key-value pairs. There are two types of keys: `ConfigKey` and
 `TaskKey`. Every key has a path, such as `/project/Foo.Bar/main/cs/baseDir` or
 `/build`. A value can be of any .NET type.
 
