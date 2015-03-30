@@ -29,6 +29,7 @@ set :ssh_options, {user: 'urbas',
 
 # Default value for :scm is :git
 # set :scm, :git
+set :git_enable_submodules, 1
 
 # Default value for :format is :pretty
 # set :format, :pretty
