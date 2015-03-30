@@ -40,6 +40,7 @@ group :development do
   gem 'capistrano-bundler'
   gem 'capistrano-rbenv'
   gem 'capistrano-rails'
+  gem 'capistrano-git-submodule-strategy'
 end
 
 group :doc do
