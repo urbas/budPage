@@ -1,9 +1,22 @@
 # Introduction
 
-Bud is a build tool. You can define your C# projects with it and Bud will fetch your
-projects' dependencies, build, run, test, package, and publish them for you. Bud
-is highly customisable too. For example, you can define your own build- and release-cycle
-tasks right in your build definition.
+<div class="alert alert-info">
+  <span class="label label-primary">Note:</span> This is an outline of concepts in Bud. Use
+  <a href="<%= Rails.application.routes.url_helpers.pages_path('docs/guide') %>">the guide</a>
+  if you simply want to start using Bud (without going into nitty-gritty details).
+</div>
+
+Bud is a build tool. It takes care of your C# projects. Bud will fetch the
+projects' dependencies, build, run, test, package, and publish them for you.
+
+In the simplest case, you don't have to configure Bud at all. Just place
+some C# files in the `Your.Project/src/main/cs` folder and invoke
+`bud run` in the `Your.Project` folder.
+
+Bud's configuration is written in C#. No XMLs or DSLs, just a plain C# file
+that you place into `Your.Project/.bud/Build.cs`. In this file you can
+specify multiple project, their dependencies, and add other customisations
+to the build process.
 
 Bud is both a command line tool as well as a library. On the one hand, you can use it
 to automate build tasks for your .NET projects. On the other hand, you can use it to
@@ -11,6 +24,20 @@ query information about projects and programmatically execute build-related task
 your .NET applications.
 
 ## Concepts
+
+Bud expects to find a class called `Build` in your `Your.Project/.bud/Build.cs` file.
+This class must implement the `Bud.IBuild` interface:
+
+```language-csharp
+namespace Bud {
+  public interface IBuild {
+    Settings Setup(Settings buildSettings, string baseDir);
+  }
+}
+```
+
+The role of the `Build` class is to return a `Settings` instance. This instance contains
+the definition of your build
 
 A build definition is a collection of key-value pairs. There are two types of keys: `ConfigKey` and
 `TaskKey`. Every key has a path, such as `/project/Foo.Bar/main/cs/baseDir` or

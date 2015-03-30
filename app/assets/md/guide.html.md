@@ -26,9 +26,7 @@ Verify that your installation succeeded by running <code>bud</code> in the comma
 </div>
 
 
-## Usage
-
-### Creating a new project
+## Creating a new project
 
 Say the name of your project is `Foo`. Create the `Foo` directory, and place your C# sources into
 `Foo/src/main/cs`.
@@ -45,7 +43,7 @@ Say the name of your project is `Foo`. Create the `Foo` directory, and place you
   </div>
 </div>
 
-### Customising the build
+## Customising the build
 
 To customise your builds, create the build configuration file `.bud/Build.cs`. If this
 file does not exist, Bud will use a default build configuration. The following build
@@ -67,7 +65,7 @@ public class Build : IBuild {
 Call methods on the `settings` object to customise your build configuration.
 
 
-### Building
+## Building
 
 <div class="panel panel-success">
   <div class="panel-heading">
@@ -88,7 +86,7 @@ executable for your project in `.bud/output/main/cs/debug/bin/Foo.exe`.
 </div>
 
 
-### Testing
+## Testing
 
 <div class="panel panel-success">
   <div class="panel-heading">
@@ -100,12 +98,8 @@ executable for your project in `.bud/output/main/cs/debug/bin/Foo.exe`.
   </div>
 </div>
 
-<div class="alert alert-warning">
-  <span class="label label-warning">TODO:</span> Testing is not yet implemented.
-</div>
 
-
-### Running executables
+## Running executables
 
 <div class="panel panel-success">
   <div class="panel-heading">
@@ -118,7 +112,7 @@ executable for your project in `.bud/output/main/cs/debug/bin/Foo.exe`.
 </div>
 
 
-### Cleaning
+## Cleaning
 
 <div class="panel panel-success">
   <div class="panel-heading">
@@ -133,7 +127,7 @@ executable for your project in `.bud/output/main/cs/debug/bin/Foo.exe`.
 Run `bud clean` to clean the files in the `.bud/output` folder.
 
 
-### Generating solution and project files
+## Generating solution and project files
 
 <div class="panel panel-success">
   <div class="panel-heading">
@@ -158,7 +152,7 @@ bud -b 1 generateSolution
 ```
 
 
-### Publishing to NuGet
+## Publishing to NuGet
 
 <div class="panel panel-success">
   <div class="panel-heading">
@@ -180,7 +174,7 @@ Now you can run `bud publish`. This will push the package to
 `https://www.nuget.org/packages/Foo/`.
 
 
-### Setting the version of your project
+## Setting the version of your project
 
 This is how you specify the version of your project in the `.bud/Build.cs` file:
 
@@ -188,7 +182,7 @@ This is how you specify the version of your project in the `.bud/Build.cs` file:
 
 2. Then call `settings.Version("1.2.3")` in your `IBuild` class.
 
-### Specifying dependencies
+## Specifying dependencies
 
 To add the `Newtonsoft.Json` library to your project
 you must place `Cs.Dependency("Newtonsoft.Json")` into
@@ -199,36 +193,66 @@ settings.Project("Foo.Bar", baseDir, Cs.Exe(Cs.Dependency("Newtonsoft.Json")), C
 ```
 
 
-### Using a plugin
+## Using a plugin
 
-Plugins add features to the build or modify it. For example, the [HelloWorldPlugin](https://github.com/urbas/Bud.Examples.HelloWorldPlugin)
-adds the task `helloWorld` to the build. It prints a hello message if you invoke `bud helloWorld`.
+Plugins add new functionality to your build. For example, the
+[HelloWorldPlugin](https://github.com/urbas/Bud.Examples.HelloWorldPlugin)
+adds the `helloWorld` task to the build. This task prints a hello message when
+you invoke `bud helloWorld`.
 
-Say you want to use the plugin `Bud.Example.HelloWorldPlugin` in your build. Create the file `.bud/.bud/Build.cs`
-with the following content:
+To use the plugin `Bud.Examples.HelloWorldPlugin` in your build do the following:
+
+1. create the file `.bud/.bud/Build.cs` with the following contents:
+
+    ```language-csharp
+    using Bud;
+    using Bud.CSharp;
+    using Bud.Projects;
+    
+    public class Build : IBuild {
+      public Settings Setup(Settings settings, string baseDir) {
+        return settings.BuildDefinition(
+          Cs.Dependency("Bud.Examples.HelloWorldPlugin")
+        );
+      }
+    }
+    ```
+    
+    This will make sure Bud downloads the plugin and makes it available to your
+    build definition.
+
+2. Edit the build definition in `.bud/Build.cs`:
+
+    ```language-csharp
+    using Bud;
+    using Bud.Examples.HelloWorldPlugin;
+    
+    public class Build : IBuild {
+      public Settings Setup(Settings settings, string baseDir) {
+        return settings.Add(new HelloWorldPlugin());
+      }
+    }
+    ```
+
+3. Now you can invoke `bud helloWorld`.
+
+
+
+## Writing a plugin
+
+The build definition file `.bud/Build.cs` should look something like this:
 
 ```language-csharp
 using Bud;
-using Bud.CSharp;
 using Bud.Projects;
 
 public class Build : IBuild {
   public Settings Setup(Settings settings, string baseDir) {
-    return settings.BuildDefinition(
-      Cs.Dependency("Bud.Example.HelloWorldPlugin")
-    );
+    return settings
+      .Version("0.0.3")
+      .BudPlugin("Bud.Examples.HelloWorldPlugin", baseDir);
   }
 }
-```
-
-
-### Writing a plugin
-
-Put the following into your build configuration (i.e., into the `.bud/Build.cs`
-file):
-
-```language-csharp
-settings.BudPlugin("Your.Plugin", baseDir)
 ```
 
 You'll have to publish your plugin before you'll be able to use it.
