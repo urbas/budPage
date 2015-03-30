@@ -14,3 +14,8 @@ Rails.application.config.assets.paths << Rails.root.join('app', 'assets', 'md')
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
+
+Rails.application.assets.context_class.class_eval do
+  include Snippets
+  include Rails.application.routes.url_helpers
+end

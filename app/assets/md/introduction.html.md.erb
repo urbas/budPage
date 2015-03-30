@@ -2,7 +2,7 @@
 
 <div class="alert alert-info">
   <span class="label label-primary">Note:</span> This document describes Bud's architecture.
-  Use <a href="<%= Rails.application.routes.url_helpers.pages_path('docs/guide') %>">the guide</a>
+  Use <a href="<%= pages_path('docs/guide') %>">the guide</a>
   if you want to start using Bud without going into nitty-gritty details.
 </div>
 
@@ -28,11 +28,7 @@ This class defines your entire build. The only requirement is that it must imple
 `Bud.IBuild` interface:
 
 ```language-csharp
-namespace Bud {
-  public interface IBuild {
-    Settings Setup(Settings buildSettings, string baseDir);
-  }
-}
+<%= snippet('bud/Core/src/main/cs/IBuild.cs') %>
 ```
 
 Bud will compile the `Build.cs` file and create a DLL. This DLL is from then on loaded when you
