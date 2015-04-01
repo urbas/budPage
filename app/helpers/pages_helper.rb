@@ -10,7 +10,7 @@ module PagesHelper
 
   Path = Struct.new(:name, :path, :path_components) do
     def render_to(renderer)
-      renderer.redirect_to renderer.pages_path(renderer.all_pages[0].path)
+      renderer.redirect_to renderer.pages_path(PagesHelper::default_page.path)
     end
   end
 
@@ -24,7 +24,7 @@ module PagesHelper
     if current_page
       current_page.render_to(self)
     else
-      redirect_to pages_path(all_pages[0].path)
+      redirect_to pages_path(PagesHelper::default_page.path)
     end
   end
 
@@ -32,8 +32,20 @@ module PagesHelper
     PagesHelper::PAGES.paths_to_pages[params[:page]]
   end
 
-  def all_pages
+  def self.default_page
+    PagesHelper::PAGES.pages[0]
+  end
+
+  def default_page
+    PagesHelper::default_page
+  end
+
+  def self.all_pages
     PagesHelper::PAGES.pages
+  end
+
+  def all_pages
+    PagesHelper::all_pages
   end
 
   def is_page_active?(parent_page)
@@ -89,8 +101,8 @@ module PagesHelper
   PAGES = new_pages(
       new_page('About', 'about'),
       new_path('Docs', 'docs'),
-      new_markdown_page('Introduction', 'docs/introduction', 'introduction.html'),
       new_markdown_page('Guide', 'docs/guide', 'guide.html'),
+      new_markdown_page('Outline', 'docs/outline', 'outline.html'),
       new_page('Licence', 'licence'),
       new_page('Contact', 'contact')
   )

@@ -1,4 +1,4 @@
-# Introduction
+# Outline
 
 <div class="alert alert-info">
   <span class="label label-primary">Note:</span> This document describes Bud's architecture.
@@ -81,7 +81,7 @@ particular `settings` instance).
 You can define your own config and task keys like this:
 
 ```language-csharp
-public static readonly ConfigKey<string> HelloWorldMessage = Key.Define("helloWorldMessage", "Prints a hello world message in the log.");
+public static readonly ConfigKey<string> HelloWorldMessage = Key.Define("helloWorldMessage", "The message to be printed by the hello world task.");
 
 public static readonly TaskKey HelloWorld = Key.Define("helloWorld", "Prints a hello world message in the log.");
 ```
