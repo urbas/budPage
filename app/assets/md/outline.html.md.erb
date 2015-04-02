@@ -6,18 +6,20 @@
   if you want to start using Bud without going into nitty-gritty details.
 </div>
 
-Bud is a build tool. It takes care of your C# projects. Bud is all about automating
-build-related processes. For example, Bud will fetch the dependencies of your projects,
-build the projects, run, test, package, and publish them for you. You can also customise
-your processes through normal C# code.
+Bud is a build tool. It builds your C# projects and automates many build-related processes.
+For example, Bud will fetch the dependencies of your projects,
+build the projects, run, test, package, and publish them.
+
+Bud is highly customisable. All its configuration is written in pure C#.
+No XMLs or DSLs, just a plain C# file:
+`My.Project/.bud/Build.cs`. In this file you can
+specify multiple projects, their dependencies, and add other customisations
+to the build process. Adding a new custom build tasks is therefore as easy as
+writing a function in C#.
 
 In the simplest case, you don't have to configure Bud at all. Just place
-some C# files in the `Your.Project/src/main/cs` folder and invoke `bud run`.
-
-Bud's configuration is written in C#. No XMLs or DSLs, just a plain C# file:
-`Your.Project/.bud/Build.cs`. In this file you can
-specify multiple projects, their dependencies, and add other customisations
-to the build process.
+some C# files in the `My.Project/src/main/cs` folder and invoke `bud run`
+in the `My.Project` folder.
 
 
 ## Concepts
@@ -25,7 +27,7 @@ to the build process.
 
 ### The `Build` class
 
-Bud expects to find a class called `Build` in your `Your.Project/.bud/Build.cs` file.
+Bud expects to find a class called `Build` in your `My.Project/.bud/Build.cs` file.
 This class must implement the `Bud.IBuild` interface:
 
 ```language-csharp
