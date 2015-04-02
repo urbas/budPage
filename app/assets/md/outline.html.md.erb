@@ -34,20 +34,19 @@ This class must implement the `Bud.IBuild` interface:
 <%= snippet('bud/Core/src/main/cs/IBuild.cs') %>
 ```
 
-Here's an example of a `Build.cs` file:
+Note that you can also place C# sources into `.bud/src/main/cs` and Bud
+will compile them together with `.bud/Build.cs` file into `.bud/Build.dll`. This
+is possible because the `.bud` is itself a C# project. Here's an example
+of a `Build.cs` file:
 
 ```language-csharp
-<%= snippet('bud/SystemTests/src/test/budProjects/ProjectWithTests/.bud/Build.cs') %>
+<%= snippet('bud/SystemTests/src/test/budProjects/SimpleProjectTest/.bud/Build.cs') %>
 ```
 
-The example above defines an executable project `A` in folder `A`. 
-You can now place some C# files into the `A/src/main/cs` folder and then invoke
-`bud run`. This will compile your C# files, create the `A.exe` executable, and
+The example above defines an executable project `Foo`. 
+C# files in `src/main/cs` will belong to this project. When you invoke
+`bud run`, Bud will compile these C# files, create the `Foo.exe` executable, and
 run it.
-
-Note that you can also place C# sources into `.bud/src/main/cs` and Bud
-will compile them together with the `.bud/Build.cs` file into the same assembly
-named `Build.dll`. This is possible because the `.bud` is just another Bud project.
 
 
 ### The `Settings` class
@@ -55,17 +54,17 @@ named `Build.dll`. This is possible because the `.bud` is just another Bud proje
 You define the build by calling `Add` methods on a `Settings` instance.
 For example, you add projects to the build by calling
 `settings.Add(new Project(...))`. In fact, adding a project generates a whole bunch of
-much smaller calls to `settings.Add(...)` each of which adds a __modifier__ to a list 
-of modifiers in settings. There are two types of modifiers: one that introduces and
-initialises a key-value pair, and another that modifies an existing key-value pair.
-Bud applies these modifiers one after the other. This results in a list of key-value
-pairs, called __build definition__.
+much smaller calls to `settings.Add(...)` each of which adds a __modifier__.
+There are two types of modifiers: one that introduces and
+initialises a key-value pair, and another that modifies the value of an existing
+key-value pair. At the end, Bud applies these modifiers one after the other. The result
+is a list of key-value pairs, called __build definition__.
 
 
 ### Build definition
 
 A __build definition__ is a collection of key-value pairs. There are two types of keys: `ConfigKey` and
-`TaskKey`. Every key has a path, such as `/project/Foo.Bar/main/cs/baseDir` or
+`TaskKey`. Every key has a _path_, such as `/project/Foo.Bar/main/cs/baseDir` or
 `/build`. A value can be of any .NET type.
 
 A value of a config key is evaluated when it is accessed for the first time. It is evaluated
