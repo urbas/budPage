@@ -4,7 +4,7 @@
 *= require main/body
 *= require frame/header
 *= require pages/common
-*= require pages/home
+*= require pages/about
 *= require pages/licence
 *= require markdown/markdown
 *= require prism/prism

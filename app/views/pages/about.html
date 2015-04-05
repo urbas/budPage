@@ -14,15 +14,13 @@
         </div>
         <div class="col-lg-2">
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4 try-and-install">
+          <p>
+            You can try Bud out now.
+          </p>
           <p>
             Install Bud via <a href="https://chocolatey.org/packages/bud">Chocolatey</a>!
           </p>
-
-          <div class="alert alert-warning">
-            <span class="label label-warning">Warning!</span> Bud is totally pre-alpha. No guarantees, many missing
-            features, but a with lot of awesome!
-          </div>
         </div>
         <div class="col-lg-1">
         </div>
@@ -34,16 +32,7 @@
     <div class="row">
 
       <div class="col-lg-4">
-        <h2 class="slim-font">Minimal setup</h2>
-
-        <p>
-          For simplest projects you don't even need anything. Just put your C# code into <code>src/main/cs</code> and
-          run <code>bud</code>. This will compile your code and generate an EXE file.
-        </p>
-      </div>
-
-      <div class="col-lg-4">
-        <h2 class="slim-font">Automate all your processes</h2>
+        <h2 class="slim-font">Automates build-related processes</h2>
 
         <p>
           From downloading dependencies, compiling your code, testing, deployment, releases. You name it. Now you can do
@@ -52,13 +41,24 @@
       </div>
 
       <div class="col-lg-4">
-        <h2 class="slim-font">Super fast and modern</h2>
+        <h2 class="slim-font">Super fast, highly customisable, and modern</h2>
 
         <p>
-          Bud is not only super fast (i.e.: as fast as a normal .NET application). Bud uses
-          great concepts used in other modern build tools.
+          Bud's build configuration is plain C# code. It's therefore as fast as normal C# programs and as customisable.
+          Bud uses great concepts used in other modern build tools (for example: task pipelines, convention over
+          configuration, dependency and package management, etc.).
         </p>
       </div>
+
+      <div class="col-lg-4">
+        <h2 class="slim-font">Easy to setup</h2>
+
+        <p>
+          For simplest projects you don't even need anything. Just put your C# code into <code>src/main/cs</code> and
+          run <code>bud</code>. This will compile your code and generate an EXE file.
+        </p>
+      </div>
+
     </div>
   </div>
 
@@ -96,9 +96,8 @@ public class Build : IBuild {
         </p>
 
         <p>
-          If you now invoke <code>bud.exe</code> in the root directory of your project, Bud will
-          compile your code and produce the executable <code>Foo.exe</code> in the folder
-          <code>.bud/output/main/cs/debug/bin</code>.
+          If you now invoke <code>bud run</code> in the root directory of your project, Bud will
+          compile your code and run the executable.
         </p>
 
       </div>

@@ -11,9 +11,8 @@ For example, Bud will fetch the dependencies of your projects,
 build the projects, run, test, package, and publish them.
 
 Bud is highly customisable. All its configuration is written in pure C#.
-No XMLs or DSLs, just a plain C# file:
-`My.Project/.bud/Build.cs`. In this file you can
-specify multiple projects, their dependencies, and add other customisations
+No XMLs or DSLs, just a plain C# file: `My.Project/.bud/Build.cs`. In this file you can
+specify your projects, their dependencies, and add other customisations
 to the build process. Adding a new custom build tasks is therefore as easy as
 writing a function in C#.
 
@@ -25,7 +24,7 @@ in the `My.Project` folder.
 ## Concepts
 
 
-### The `Build` class
+### The `Build.cs` file and the `Build` class
 
 Bud expects to find a class called `Build` in your `My.Project/.bud/Build.cs` file.
 This class must implement the `Bud.IBuild` interface:
@@ -35,7 +34,7 @@ This class must implement the `Bud.IBuild` interface:
 ```
 
 Note that you can also place C# sources into `.bud/src/main/cs` and Bud
-will compile them together with `.bud/Build.cs` file into `.bud/Build.dll`. This
+will compile them together with `.bud/Build.cs` into `.bud/Build.dll`. This
 is possible because the `.bud` is itself a C# project. Here's an example
 of a `Build.cs` file:
 
@@ -43,7 +42,7 @@ of a `Build.cs` file:
 <%= snippet('bud/SystemTests/src/test/budProjects/SimpleProjectTest/.bud/Build.cs') %>
 ```
 
-The example above defines an executable project `Foo`. 
+The example above defines an executable project, named `Foo`.
 C# files in `src/main/cs` will belong to this project. When you invoke
 `bud run`, Bud will compile these C# files, create the `Foo.exe` executable, and
 run it.
@@ -57,38 +56,36 @@ For example, you add projects to the build by calling
 much smaller calls to `settings.Add(...)` each of which adds a __modifier__.
 There are two types of modifiers: one that introduces and
 initialises a key-value pair, and another that modifies the value of an existing
-key-value pair. At the end, Bud applies these modifiers one after the other. The result
-is a list of key-value pairs, called __build definition__.
+key-value pair. At the end, settings will contain a bunch of modifiers. Bud will
+merge these modifiers by applying them one after the other. The result is a list
+of key-value pairs, called __build definition__.
+
+<div class="alert alert-info">
+  <span class="label label-primary">Note:</span> The <code>Settings</code> class is immutable. Therefore,
+  <code>settings.Add(...)</code> returns a new instance instead of mutating the existing one.
+</div>
 
 
 ### Build definition
 
-A __build definition__ is a collection of key-value pairs. There are two types of keys: `ConfigKey` and
-`TaskKey`. Every key has a _path_, such as `/project/Foo.Bar/main/cs/baseDir` or
+A __build definition__ is a collection of key-value pairs. It contains two types of
+keys: `ConfigKey` and `TaskKey`. Every key has a _path_, such as `/project/Foo.Bar/main/cs/baseDir` or
 `/build`. A value can be of any .NET type.
 
 A value of a config key is evaluated when it is accessed for the first time. It is evaluated
 once per lifetime of the build definition. A value of a task key is evaluated once per root-level task
-invocation (i.e.: if a task calls another task twice, its value is evaluated once only and in the second
-invocation the cached value is used).
+invocation (i.e.: if a task calls another task twice, its value is evaluated once, this value is cached
+and hence the cached value is used for every other invocation).
 
-You define values of config keys and task keys by building them up (i.e., you add small modifiers to a
-`Settings` instance). For example, you can introduce your own key and value by calling
-`settings.Add(MySettings.HelloWorldMessage.Init("Hello, World!"))`. The parameter to the
-`Add` method is a modifier. This modifier initialises the
-`HelloWorldMessage`
-key with the value `"Hello, World!"` (but only if it has not been initialised before in this
-particular `settings` instance).
-You can define your own config and task keys like this:
+### Customising the build
+
+You can write your own tasks and configurations either directly in the `.bud/Build.cs` file or in sources
+within `.bud/src/main/cs`. The recommended way to create new build customisations is to write a Bud plugin.
+Here's en example of a plugin:
 
 ```language-csharp
-public static readonly ConfigKey<string> HelloWorldMessage = Key.Define("helloWorldMessage", "The message to be printed by the hello world task.");
+<%= snippet('bud/Examples/Bud.Examples.HelloWorldPlugin/src/main/cs/HelloWorldPlugin.cs') %>
 
-public static readonly TaskKey HelloWorld = Key.Define("helloWorld", "Prints a hello world message in the log.");
 ```
 
-<div class="alert alert-info">
-  <span class="label label-primary">Note:</span> The <code>Settings</code> class is immutable. Therefore,
-  <code>settings.Add(...)</code> returns
-  a new instance instead of mutating the existing one.
-</div>
+To use the plugin in the build, simply call `settings.Add(new HelloWorldPlugin())` in your `Build` class.
