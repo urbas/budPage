@@ -13,16 +13,13 @@ choco install bud
 
 Verify that your installation succeeded by running <code>bud</code> in the command prompt.
 
-### Linux
+### Linux and OS X
+
+Download [the zip package](http://bud.urbas.si/packages/bud-0.0.3.zip), extract, and invoke `bud.exe` from
+ the extracted folder.
 
 <div class="alert alert-warning">
-  <span class="label label-warning">TODO:</span> Add support for Linux.
-</div>
-
-### OS X
-
-<div class="alert alert-warning">
-  <span class="label label-warning">TODO:</span> Add support for OS X.
+  <span class="label label-warning">TODO:</span> Add installers for for Linux and OS X.
 </div>
 
 
