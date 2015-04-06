@@ -53,7 +53,11 @@ module PagesHelper
   end
 
   def is_in_path_of?(this_page, parent_page)
-    this_page.path_components[0..(parent_page.path_components.length-1)] == parent_page.path_components
+    if this_page
+      this_page.path_components[0..(parent_page.path_components.length-1)] == parent_page.path_components
+    else
+      false
+    end
   end
 
   def has_sub_pages?(page)
