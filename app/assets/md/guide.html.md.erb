@@ -208,17 +208,7 @@ To use the plugin `Bud.Examples.HelloWorldPlugin` in your build do the following
 1. create the file `.bud/.bud/Build.cs` with the following contents:
 
     ```language-csharp
-    using Bud;
-    using Bud.CSharp;
-    using Bud.Projects;
-    
-    public class Build : IBuild {
-      public Settings Setup(Settings settings, string baseDir) {
-        return settings.BuildDefinition(
-          Cs.Dependency("Bud.Examples.HelloWorldPlugin")
-        );
-      }
-    }
+   <%= snippet('bud/SystemTests/src/test/budProjects/BuildLevels/.bud/.bud/Build.cs', indent: 3) %>
     ```
     
     This will make sure Bud downloads the plugin and makes it available to your
@@ -227,14 +217,7 @@ To use the plugin `Bud.Examples.HelloWorldPlugin` in your build do the following
 2. Edit the build definition in `.bud/Build.cs`:
 
     ```language-csharp
-    using Bud;
-    using Bud.Examples.HelloWorldPlugin;
-    
-    public class Build : IBuild {
-      public Settings Setup(Settings settings, string baseDir) {
-        return settings.Add(new HelloWorldPlugin());
-      }
-    }
+   <%= snippet('bud/SystemTests/src/test/budProjects/BuildLevels/.bud/Build.cs', indent: 3) %>
     ```
 
 3. Now you can invoke `bud helloWorld`.
@@ -246,16 +229,8 @@ To use the plugin `Bud.Examples.HelloWorldPlugin` in your build do the following
 The build definition file `.bud/Build.cs` should look something like this:
 
 ```language-csharp
-using Bud;
-using Bud.Projects;
+<%= snippet('bud/Examples/Bud.Examples.HelloWorldPlugin/.bud/Build.cs') %>
 
-public class Build : IBuild {
-  public Settings Setup(Settings settings, string baseDir) {
-    return settings
-      .Version("0.0.3")
-      .BudPlugin("Bud.Examples.HelloWorldPlugin", baseDir);
-  }
-}
 ```
 
 You'll have to publish your plugin before you'll be able to use it.

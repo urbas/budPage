@@ -5,14 +5,26 @@ module Snippets
   SNIPPET_END_MARKER = 'END_SNIPPET:'
 
   def snippet(path, **options)
-    snippet_id = options[:id]
+    snippet_lines = read_snippet_lines(path, options[:id])
+    snippet_lines = indent_lines(snippet_lines, options)
+    snippet_lines.join
+  end
+
+  private
+  def read_snippet_lines(file_path, snippet_id)
     if snippet_id
-      File.open(path) { |file|
-        remove_indentation(lines_in_snippet(snippet_id, file.readlines)).join
+      File.open(file_path) { |file|
+        remove_indentation(lines_in_snippet(snippet_id, file.readlines))
       }
     else
-      File.read(Rails.root.join(path))
+      File.readlines(Rails.root.join(file_path))
     end
+  end
+
+  private
+  def indent_lines(lines, options)
+    line_prefix = options.fetch(:indent_string, ' ') * options.fetch(:indent, 0)
+    lines[0, 1] + lines[1..-1].map { |line| line_prefix + line }
   end
 
   private
