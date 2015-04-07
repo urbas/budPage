@@ -42,24 +42,26 @@ Say the name of your project is `Foo`. Create the `Foo` directory, and place you
 
 ## Customising the build
 
-To customise your builds, create the build configuration file `.bud/Build.cs`. If this
-file does not exist, Bud will use a default build configuration. The following build
-configuration is equivalent to the default one.
+To customise your builds, create the file `.bud/Build.cs`. In this file, define the class called `Build` in the root
+namespace. This class must implement the `Settings Setup(Settings settings, string baseDir)` method. In this method,
+you can modify the `settings` instance by calling its `Add` methods.
+
+
+The `Settings` class is immutable. Every call to `Add` methods returns a new instance of the `Settings` class.
+Therefore, you should chain the `Add` calls like this:
 
 ```language-csharp
-using Bud;
-using Bud.CSharp;
-using Bud.Projects;
-using System.IO;
-
-public class Build : IBuild {
-  public Settings Setup(Settings settings, string baseDir) {
-    return settings.Project(Path.GetFileName(baseDir), baseDir, Cs.Exe(), Cs.Test());
-  }
-}
+return settings.Add(settingFoo)
+               .Add(settingBar)
+               .Add(settingGoo);
 ```
 
-Call methods on the `settings` object to customise your build configuration.
+If the `.bud/Build.cs` file does not exist, Bud will use the following default:
+
+```language-csharp
+<%= snippet('bud/Core/src/main/cs/Build/DefaultBuild.cs') %>
+
+```
 
 
 ## Building
@@ -78,7 +80,7 @@ Run `bud build` in the `Foo` directory. This will produce the
 executable for your project in `.bud/output/main/cs/debug/bin/Foo.exe`.
 
 <div class="alert alert-info">
-  <span class="label label-primary">Note:</span> Bud invokes the `build` task
+  <span class="label label-primary">Note:</span> Bud invokes the <code>build</code> task
   by default (if you run Bud without any command line arguments).
 </div>
 
@@ -181,13 +183,17 @@ This is how you specify the version of your project in the `.bud/Build.cs` file:
 
 ## Specifying dependencies
 
-To add the `Newtonsoft.Json` library to your project
-you must place `Cs.Dependency("Newtonsoft.Json")` into
-the `.bud/Build.cs` like this:
+To add the `Foo.Bar` library to your project
+you must place `Cs.Dependency("Foo.Bar")` into
+the project's desired build target. Here's an example of a project with a dependency:
 
 ```language-csharp
-settings.Project("Foo.Bar", baseDir, Cs.Exe(Cs.Dependency("Newtonsoft.Json")), Cs.Test());
+<%= snippet('bud/SystemTests/src/test/budProjects/ExternalDependenciesTest/.bud/Build.cs') %>
+
 ```
+
+The example above adds a specific version of the `Urbas.Example.Foo` library to the `Foo` projects
+main executable build target.
 
 
 ## Using a plugin
