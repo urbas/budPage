@@ -15,11 +15,11 @@ Verify that your installation succeeded by running <code>bud</code> in the comma
 
 ### Linux and OS X
 
-Download [the zip package](http://bud.urbas.si/packages/bud-0.0.3.zip), extract, and invoke `bud.exe` from
- the extracted folder.
+Download [the zip package](http://bud.urbas.si/packages/bud-0.0.3.zip), extract its contents, and invoke
+`bud.exe` from the extracted folder.
 
 <div class="alert alert-warning">
-  <span class="label label-warning">TODO:</span> Add installers for for Linux and OS X.
+  <span class="label label-warning">TODO:</span> Add installers for Linux and OS X.
 </div>
 
 
@@ -42,25 +42,29 @@ Say the name of your project is `Foo`. Create the `Foo` directory, and place you
 
 ## Customising the build
 
-To customise your builds, create the file `.bud/Build.cs`. In this file, define the class called `Build` in the root
-namespace. This class must implement the `Settings Setup(Settings settings, string baseDir)` method. In this method,
-you can modify the `settings` instance by calling its `Add` methods.
+To customise your builds, create the file `.bud/Build.cs`. In this file, you must define the class called `Build`.
+This class must be placed in the root namespace and must implement the `Bud.IBuild` interface. The interface
+has the following definition:
 
+```language-csharp
+<%= snippet('bud/Core/src/main/cs/IBuild.cs') %>
+```
+ 
+In your `Build` class, you can modify the `settings` instance by calling its `Add` methods.
 
-The `Settings` class is immutable. Every call to `Add` methods returns a new instance of the `Settings` class.
+__Here's an example of a `.bud/Build.cs` file__:
+
+```language-csharp
+<%= snippet('bud/SystemTests/src/test/budProjects/SimpleProjectTest/.bud/Build.cs') %>
+```
+
+Note that the `Settings` class is immutable. Every call to `Add` methods returns a new instance of the `Settings` class.
 Therefore, you should chain the `Add` calls like this:
 
 ```language-csharp
 return settings.Add(settingFoo)
                .Add(settingBar)
                .Add(settingGoo);
-```
-
-If the `.bud/Build.cs` file does not exist, Bud will use the following default:
-
-```language-csharp
-<%= snippet('bud/Core/src/main/cs/Build/DefaultBuild.cs') %>
-
 ```
 
 
