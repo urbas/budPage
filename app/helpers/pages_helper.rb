@@ -6,7 +6,7 @@ module PagesHelper
     if current_page
       current_page.render_to(self)
     else
-      redirect_to pages_path(PagesHelper::default_page.path)
+      redirect_to pages_path(PagesHelper::default_page.absolute_path)
     end
   end
 
