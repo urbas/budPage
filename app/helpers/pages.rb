@@ -2,12 +2,10 @@ module Pages
   class Page
     def initialize(name, *sub_pages, **options)
       @name = name
-      @sub_pages = sub_pages
+      @sub_pages = Rails.env.production? ? sub_pages.select { |sub_page| !sub_page.is_draft? } : sub_pages
       @parent_page = nil
       @is_draft = options.fetch(:is_draft, false)
-      sub_pages
-          .select { |sub_page| !sub_page.is_draft? }
-          .each { |sub_page| sub_page.parent_page = self }
+      sub_pages.each { |sub_page| sub_page.parent_page = self }
     end
 
     def name
