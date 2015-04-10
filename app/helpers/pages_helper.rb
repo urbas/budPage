@@ -19,19 +19,14 @@ module PagesHelper
   end
 
   def is_page_active?(page)
-    page.is_in?(Pages::path_to_components(params[:page]))
+    page.is_in_path_of?(current_page)
   end
 
   PAGES = RootPage.new(
-      Page.new('About', 'about'),
-      ContainerPage.new(
-          'Docs',
-          'docs',
-          MarkdownPage.new('Guide', 'guide', 'guide.html'),
-          MarkdownPage.new('Outline', 'outline', 'outline.html')
-      ),
-      Page.new('Licence', 'licence'),
-      Page.new('Contact', 'contact')
+      Page.new('About'),
+      ContainerPage.new('Blog', MarkdownPage.new('Hello', 'blog/hello.html'), is_draft: true),
+      ContainerPage.new('Docs', MarkdownPage.new('Guide', 'guide.html'), MarkdownPage.new('Outline', 'outline.html')),
+      Page.new('Licence'),
+      Page.new('Contact')
   )
-
 end
