@@ -20,11 +20,7 @@ In the simplest case, you don't have to configure Bud at all. Just place
 some C# files in the `My.Project/src/main/cs` folder and invoke `bud run`
 in the `My.Project` folder.
 
-
-## Concepts
-
-
-### The `Build.cs` file and the `Build` class
+## The `Build.cs` file and the `Build` class
 
 Bud expects to find a class called `Build` in your `My.Project/.bud/Build.cs` file.
 This class must implement the `Bud.IBuild` interface:
@@ -48,7 +44,7 @@ C# files in `src/main/cs` will belong to this project. When you invoke
 run it.
 
 
-### The `Settings` class
+## The `Settings` class
 
 You define the build by calling `Add` methods on a `Settings` instance.
 For example, you add projects to the build by calling
@@ -66,7 +62,7 @@ of key-value pairs, called __build definition__.
 </div>
 
 
-### Build definition
+## Build definition
 
 A __build definition__ is a collection of key-value pairs. It contains two types of
 keys: `ConfigKey` and `TaskKey`. Every key has a _path_, such as `/project/Foo.Bar/main/cs/baseDir` or
@@ -77,7 +73,7 @@ once per lifetime of the build definition. A value of a task key is evaluated on
 invocation (i.e.: if a task calls another task twice, its value is evaluated once, this value is cached
 and hence the cached value is used for every other invocation).
 
-### Customising the build
+## Customising the build
 
 You can write your own tasks and configurations either directly in the `.bud/Build.cs` file or in sources
 within `.bud/src/main/cs`. The recommended way to create new build customisations is to write a Bud plugin.

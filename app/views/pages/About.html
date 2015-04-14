@@ -18,6 +18,7 @@
           <p>
             You can try Bud out now.
           </p>
+
           <p>
             Install Bud via <a href="https://chocolatey.org/packages/bud">Chocolatey</a>!
           </p>
@@ -84,11 +85,13 @@ using Bud.Projects;
 
 public class Build : IBuild {
   public Settings Setup(Settings settings, string baseDir) {
-    return settings.Project("Foo", baseDir, Cs.Exe(
+    var projectFoo = new Project("Foo.Bar", baseDir, Cs.Exe(
         Cs.Dependency("Newtonsoft.Json")
     ));
+    return settings.Add(projectFoo);
   }
 }
+
 </code></pre>
 
         <p>
