@@ -2,41 +2,57 @@
 
 Bud is your friendly C# neighbourhood build tool. Bud defines and manages C# projects for you. He automates all kinds
 of tasks around those projects. For example, Bud will fetch remote dependencies, build your projects, run tests,
-and publish your projects for others to consume. You can teach Bud new tricks too. You can either write your own tasks
-directly in C# or use tasks that others have written and published.
+and publish your projects for others to consume. Bud is designed to fit nicely into all kinds of continuous integration
+tasks. You can teach Bud new tricks too. You can either write your own tasks directly in C# or use tasks that other
+Bud users have written and published.
 
-## Bud's story
+Take a look at [the guide](/Docs/Guide) to start using Bud or [the outline](Docs/Outline) to learn more.
 
-Bud's journey started in the savannas of the GNU. There he met Autotools, a large and well known family of
-makers and configurators. Bud lived with the family for some years. He learned a lot from them. One of the
-things they taught him was to always verify the assumptions you have about the environment before embarking
-on any building in the savannah. If the environment does not match your assumptions, you should notify the
-masters and ask them to fix the environment first. After all, only the masters should manipulate the
-environment.
+## Bud's mission
 
-Bud was particularly interested in how the work is distributed within the family. First, there is the Aclocal tool,
-which prepares the build ground and places some of her brothers and sisters into right positions.
+Bud will do his best to remove all the pain from building and automating .NET projects. Bud will improve
+developers' daily work as well as a project's continuous integration, deployment, documentation, and
+customer delivery.
 
-Good:
-- highly configurable
-- supported on multiple platforms
-- geared towards
+Bud is aware how important it is to make build processes as simple, consistent, reliable, and swift
+as possible. Teams should not loose time with the build and they should be able to quickly integrate
+each-other's projects (either at the level of sources or published artifacts). Releases should be
+quick and simple too.
 
-// Stopped here
-It took Bud a long time to get to know every member of the Autotools family.
- 
-He then ventured forth to the to the JVM country. He first
-stumbled onto the fields of Java, where he worked with the great Ant and listened to the revolutionary ideas of Maven.
-Also in the JVM country, Bud visited the city of Scala, where he met SBT, a cousin of Maven, who talked about the
-benefits of a type system for organising one's work.
+In short, Bud's goal is to bring .NET project automation to the next level.
 
-, and Leiningen, caves of Ruby, nests of Python, and the JavaScript jungle.
-Bud met many wise build tools in those lands. He worked with them, learned fromm them, and argued about difficult topics
-with them. Bud also picked up a lot of cool tricks from them. In short, He made a lot of good friends.
+## Bud's voyages
 
-Bud's first acquaintances were a family called Autotools from the land of GNU. They told him stories about 
+Before Bud was released into the wilds of The .NET Build Land, he travelled the world and met many wonderful
+build friends. A long time ago, he travelled to the savannas of the GNU where he met and worked with the
+Autotools family for a couple of years.
 
-Maven, for
-example, who lives in Java, told Bud about the importance of a good project structure and the benefits of a folder
-layout that matches build targets. Maven also told him about   
-Maven told Bud stories about folder structure and build target., SBT, Rake, and Gulp.
+Bud then ventured forth to the to the country of JVM. There he first
+entered the fields of Java, where he worked with the great Ant and listened to the revolutionary ideas of Maven.
+Also in the JVM country, Bud visited the city of Scala, where he met SBT (a cousin of Maven). Bud learned
+from SBT that it is important to allow developers to customise the build with their own tasks and that a type
+system can help them quite a bit.
+
+Afterwards (still in the country of JVM), Bud stumbled upon Clojure, a beautiful valley enclosed by a
+wonderfully symmetric system of semi-circular mountain ranges. There Bud met Leiningen, who told epic
+stories about his battles with Ant and his project-preparation powers. Just like SBT, Leiningen told
+Bud how important it is to empower developers with the ability to customise the build with new tasks
+and quickly test them. Bud learned a lot again.
+
+Not far from Clojure valley, Bud entered the groves of Groovy, a fairly tranquil place. Gradle lives
+there, a very powerful builder of webs, desktop stuff, and Androids. Bud was amazed at Gradle's
+versatility.
+
+Soon after, in the gem-rich caves of Ruby, Bud visited Bundler and Rake, a truly harmonious duo. Bud
+studied their ways and perhaps the most astounding discovery was that Bundler would do work only every
+now and then, while Rake would work overtime (even during deployment and the operation of the built
+project). Rake would tell Bud about Rails and how she manages Rails' lifecycle, processes its assets,
+migrates its databases, and many other wondrous tasks. Bud decided that it would strive to be as powerful
+as Rake.
+
+Bud also visited the JavaScript jungle, where he met the NPM, Bower, Gulp, and ???. Bud noticed how
+extremely quick startup of the build and even faster execution times spread joy and happiness amongst
+developers. Bud decided he'll spread such joy himself.
+
+In short, Bud made friends with many wise build tools in his lifetime. He decided it's now time for
+him to contribute back to the .NET ecosystem.

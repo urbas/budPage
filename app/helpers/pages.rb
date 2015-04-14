@@ -87,8 +87,8 @@ module Pages
   end
 
   class MarkdownPage < Page
-    def initialize(name, markdown_asset)
-      super(name)
+    def initialize(name, markdown_asset, **options)
+      super(name, *[], **options)
       @markdown_asset = markdown_asset
     end
 

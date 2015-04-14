@@ -1,0 +1,46 @@
+## Bud meets Autotools
+
+Bud's journey started in the savannas of the GNU. There he met Autotools, a large and well known family of
+makers and configurators. Bud lived with the family for a couple of years. He learned a lot from them.
+One of the things they taught him was to verify the assumptions you have about the environment before
+engaging in any building. If the environment does not match your assumptions, you should notify the
+developer and ask them to fix it.
+
+Bud was particularly interested in how the work was distributed within the Autotools family. He noticed that
+Autoscan first prepares the build ground. She looks at the current state of the build ground, produces a
+shiny blueprint, and places it on the ground. She calls it `configure.ac`. Autoscan does her job once and then
+waddles away to a different build ground. Now it's the job of the developer to update and expand the blueprint.
+Bud sometime saw that the developer would bring some other blueprints to the build ground too. It was a piece
+of paper called `Makefile.am`. These two blueprints seem to stay on the build ground even after the developer
+leaves and another developer takes over.
+
+Before the building commences, the developer tells Autoconf to translate instructions from `configure.ac` and
+`Makefile.am` into instructions that the big brother Make will understand. Autoconf starts by fetching her
+siblings M4, Aclocal, Autoheader, Automake, Libtoolize, and Autopoint. Together they look at `configure.ac`
+and `Makefile.am`, and produce a robot called `configure`. During this process they place various tools all
+over the build ground. After the robot is constructed, Autoconf and her siblings retire, leaving behind the
+scattered tools just in case the developer changes the blueprints and decides to reconstruct `configure`. It
+is faster if the tools are already there.
+
+Now the developer can tell the robot to produce a piece of paper called `Makefile`. These are instructions
+for brother Make. The robot can produce different `Makefiles` based on what the developer whispers into its
+command line. The robot will first check the environment that everything Make needs is present in the
+environment. If anything is missing, the robot will tell the developer. The robot recites the warnings that
+the developer placed into `configure.ac` themselves. For example, the developer knows that they need a
+librarian called Boost. Therefore, the developer will write the following into `configure.ac`:
+
+```
+AC_LANG_PUSH([C++])
+AC_CHECK_HEADERS([boost/foreach.hpp], [], [AC_MSG_ERROR(You need the Boost libraries.)])
+AC_LANG_POP([C++])
+```
+
+The robot will go around the savannah, look for the book called `foreach.hpp`, and if it cannot find the book,
+the robot will tell the developer that Boost is not around. The developer then has to go and fetch
+Boost.
+
+After the robot is happy with the environment, it finally produces the `Makefile`. From here on, the developer
+instructs Make to build the castle.
+
+Bud learned from this experience and decided that he would like to simplify the build-preparation process.
+Bud wanted to not bother the developer too much and perform as many tasks as possible himself. 

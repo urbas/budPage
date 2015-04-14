@@ -24,7 +24,7 @@ module PagesHelper
 
   PAGES = RootPage.new(
       Page.new('About'),
-      ContainerPage.new('Blog', MarkdownPage.new('Hello', 'blog/hello.html'), is_draft: true),
+      MarkdownPage.new('Hello', 'blog/hello.html'),
       ContainerPage.new('Docs', MarkdownPage.new('Guide', 'guide.html'), MarkdownPage.new('Outline', 'outline.html')),
       Page.new('Licence'),
       Page.new('Contact')
