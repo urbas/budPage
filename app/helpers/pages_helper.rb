@@ -30,7 +30,7 @@ module PagesHelper
           'Docs',
           MarkdownPage.new('Guide', 'guide.html'),
           MarkdownPage.new('Outline', 'outline.html'),
-          MarkdownPage.new('Roadmap', 'roadmap.html', is_draft: true)
+          MarkdownPage.new('Roadmap', 'roadmap.html')
       ),
       Page.new('Licence'),
       Page.new('Contact')
