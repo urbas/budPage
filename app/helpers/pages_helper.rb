@@ -4,6 +4,7 @@ module PagesHelper
 
   def render_current_page
     if current_page
+      @page_title = current_page.name
       current_page.render_to(self)
     else
       redirect_to pages_path(PagesHelper::default_page.absolute_path)
@@ -25,7 +26,12 @@ module PagesHelper
   PAGES = RootPage.new(
       Page.new('About'),
       MarkdownPage.new('Hello', 'blog/hello.html'),
-      ContainerPage.new('Docs', MarkdownPage.new('Guide', 'guide.html'), MarkdownPage.new('Outline', 'outline.html')),
+      ContainerPage.new(
+          'Docs',
+          MarkdownPage.new('Guide', 'guide.html'),
+          MarkdownPage.new('Outline', 'outline.html'),
+          MarkdownPage.new('Roadmap', 'roadmap.html', is_draft: true)
+      ),
       Page.new('Licence'),
       Page.new('Contact')
   )
