@@ -32,7 +32,7 @@ module PagesHelper
           MarkdownPage.new('Outline', 'outline.html'),
           MarkdownPage.new('Roadmap', 'roadmap.html')
       ),
-      Page.new('Licence'),
+      MarkdownPage.new('Licence', 'licence.html'),
       Page.new('Contact')
   )
 end
