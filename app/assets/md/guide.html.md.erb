@@ -16,12 +16,7 @@ Verify that your installation succeeded by running <code>bud</code> in the comma
 ### Linux and OS X
 
 Download [the zip package](http://bud.urbas.si/packages/bud-0.1.0.zip), extract its contents, and invoke
-`bud.exe` from the extracted folder.
-
-<div class="alert alert-warning">
-  <span class="label label-warning">TODO:</span> Add installers for Linux and OS X.
-</div>
-
+`mono bud.exe` from the extracted folder.
 
 ## Creating a new project
 
@@ -59,7 +54,7 @@ __Here's an example of a `.bud/Build.cs` file__:
 ```
 
 Note that the `Settings` class is immutable. Every call to `Add` methods returns a new instance of the `Settings` class.
-Therefore, you should chain the `Add` calls like this:
+Therefore, you should chain calls of `Add` like this:
 
 ```language-csharp
 return settings.Add(settingFoo)
@@ -101,6 +96,12 @@ executable for your project in `.bud/output/main/cs/debug/bin/Foo.exe`.
   </div>
 </div>
 
+This will run tests for all projects in your build. Here's how to run tests for a specific project:
+
+```language-bash
+bud project/Foo.Bar/test/cs/test
+```
+
 
 ## Running executables
 
@@ -113,6 +114,12 @@ executable for your project in `.bud/output/main/cs/debug/bin/Foo.exe`.
       <pre><code>run</code></pre>
   </div>
 </div>
+
+This will run all the executable in your build. Here's how to run a specific project:
+
+```language-bash
+bud project/Foo.Bar/main/cs/run
+```
 
 
 ## Cleaning
