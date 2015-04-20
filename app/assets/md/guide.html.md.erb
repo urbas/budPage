@@ -57,9 +57,13 @@ Note that the `Settings` class is immutable. Every call to `Add` methods returns
 Therefore, you should chain calls of `Add` like this:
 
 ```language-csharp
-return settings.Add(settingFoo)
-               .Add(settingBar)
-               .Add(settingGoo);
+<%= snippet('bud/Bud.Examples.Snippets/src/main/cs/SettingsConstructionSnippets.cs', id: :chainedSettingsConstruction) %>
+```
+
+### Defining a library project
+
+```language-csharp
+<%= snippet('bud/Bud.Examples.Snippets/src/main/cs/CSharpProjectSnippets.cs', id: :libraryProjectDefinition) %>
 ```
 
 
