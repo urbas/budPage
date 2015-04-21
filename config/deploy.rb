@@ -2,7 +2,7 @@
 lock '3.4.0'
 
 set :application, 'budpage'
-set :repo_url, 'git@bitbucket.org:urbas/budpage.git'
+set :repo_url, 'git@github.com:urbas/budPage.git'
 
 # rbenv
 set :rbenv_type, :user
