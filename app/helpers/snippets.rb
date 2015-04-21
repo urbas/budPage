@@ -14,7 +14,7 @@ module Snippets
   def read_snippet_lines(file_path, snippet_id)
     if snippet_id
       File.open(file_path) { |file|
-        remove_indentation(lines_in_snippet(snippet_id, file.readlines))
+        remove_indentation(extract_snippet_id_lines(snippet_id, file.readlines))
       }
     else
       File.readlines(Rails.root.join(file_path))
@@ -34,7 +34,7 @@ module Snippets
   end
 
   private
-  def lines_in_snippet(snippet_id, lines)
+  def extract_snippet_id_lines(snippet_id, lines)
     start_of_snippet = SNIPPET_START_MARKER + ' ' + snippet_id.to_s
     end_of_snippet = SNIPPET_END_MARKER + ' ' + snippet_id.to_s
     lines.take_while { |line| !end_of_snippet.in?(line) }
