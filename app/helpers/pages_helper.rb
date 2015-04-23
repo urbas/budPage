@@ -28,6 +28,7 @@ module PagesHelper
       MarkdownPage.new('Hello', 'blog/hello.html'),
       ContainerPage.new(
           'Docs',
+          MarkdownPage.new('Releases', 'releaseNotes.html'),
           MarkdownPage.new('Guide', 'guide.html'),
           MarkdownPage.new('Outline', 'outline.html'),
           MarkdownPage.new('Roadmap', 'roadmap.html')
