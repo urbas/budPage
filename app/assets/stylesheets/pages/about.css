@@ -1,29 +1,28 @@
 .pages-about .jumbotron {
-    margin-bottom: 0;
-    padding-bottom: 50px;
-    padding-top: 60px;
+  margin-bottom: 0;
+  padding-bottom: 50px;
+  padding-top: 60px;
 }
 
 .pages-about .col-lg-4 {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .pages-about .super-trio h2 {
-    text-align: center;
+  text-align: center;
 }
 
 .pages-about .super-trio {
-    padding-bottom: 40px;
-    padding-top: 40px;
-    border-bottom: 1px solid #ccc;
-    border-top: 1px solid #ccc;
-    background-color: #f9f9f9;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  border-bottom: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+  background-color: #f9f9f9;
 }
 
-.pages-about .super-trio  p {
-    margin-right: 10px;
-    margin-left: 10px;
-    text-align: center;
+.pages-about .super-trio p {
+  text-align: center;
+  font-size: 1.1em;
 }
 
 .pages-about .try-and-install {
