@@ -57,11 +57,11 @@ module Pages
     protected
     def parent_page=(new_parent)
       if !new_parent
-        raise Exception.new("Cannot set the parent to nil.")
+        raise Exception.new('Cannot set the parent to nil.')
       elsif parent_page.nil?
         @parent_page = new_parent
       else
-        raise Exception.new("Cannot set a parent. The parent has already been set.")
+        raise Exception.new('Cannot set a parent. The parent has already been set.')
       end
     end
 
