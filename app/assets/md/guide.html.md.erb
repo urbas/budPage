@@ -254,3 +254,28 @@ Please use the following plugins as a reference source:
 
 1. [Hello world plugin](https://github.com/urbas/Bud.Examples.HelloWorldPlugin)
 
+
+
+## Macros
+
+Invoking a macro with a given name:
+
+```language-bash
+bud @macroName param1 param2 ... paramN
+```
+
+Listing all available macros:
+
+```language-bash
+bud -jq macros
+```
+
+### Writing a macros
+
+Unlike tasks, can read command-line arguments, transform settings, and invoke tasks multiple times.
+
+Here are some examples on how to write macros:
+
+```language-csharp
+<%= snippet('bud/Bud.SystemTests/src/test/budProjects/MacroTest/.bud/Build.cs') %>
+```
