@@ -274,6 +274,15 @@ Listing all available macros:
 bud -jq macros
 ```
 
+You can invoke multiple macros and tasks sequentially. You must use the `@` character to separate macro
+parameters from other tasks and macros:
+
+```language-bash
+bud fooTask @barMacro param1 param2 @ @bazMacro param @ booConfig mooTask
+```
+
+Tasks invoked after a macro will use settings (i.e.: configurations and tasks) returned by the macro.
+
 ### Writing a macro
 
 Here are some examples of macro definitions:
