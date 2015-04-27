@@ -259,7 +259,10 @@ Please use the following plugins as a reference source:
 <a name="Macros"></a>
 ## Macros
 
-Invoking a macro with a given name:
+Macros are functions that get their parameters from the command-line. Macros can transform settings
+at run-time, and they can invoke tasks multiple times. By comparison, tasks cannot do any of these.
+
+Invoking a macro:
 
 ```language-bash
 bud @macroName param1 param2 ... paramN
@@ -273,9 +276,7 @@ bud -jq macros
 
 ### Writing a macro
 
-Unlike tasks, can read command-line arguments, transform settings, and invoke tasks multiple times.
-
-Here are some examples on how to write macros:
+Here are some examples of macro definitions:
 
 ```language-csharp
 <%= snippet('bud/Bud.SystemTests/src/test/budProjects/MacroTest/.bud/Build.cs') %>
