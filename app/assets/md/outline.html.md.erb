@@ -26,7 +26,7 @@ Bud expects to find a class called `Build` in your `My.Project/.bud/Build.cs` fi
 This class must implement the `Bud.IBuild` interface:
 
 ```language-csharp
-<%= snippet('bud/Core/src/main/cs/IBuild.cs') %>
+<%= snippet('bud/Bud.Core/src/main/cs/IBuild.cs') %>
 ```
 
 Note that you can also place C# sources into `.bud/src/main/cs` and Bud
@@ -35,7 +35,7 @@ is possible because the `.bud` is itself a C# project. Here's an example
 of a `Build.cs` file:
 
 ```language-csharp
-<%= snippet('bud/SystemTests/src/test/budProjects/SimpleProjectTest/.bud/Build.cs') %>
+<%= snippet('bud/Bud.SystemTests/src/test/budProjects/SimpleProjectTest/.bud/Build.cs') %>
 ```
 
 The example above defines an executable project, named `Foo`.

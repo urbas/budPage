@@ -42,7 +42,7 @@ This class must be placed in the root namespace and must implement the `Bud.IBui
 has the following definition:
 
 ```language-csharp
-<%= snippet('bud/Core/src/main/cs/IBuild.cs') %>
+<%= snippet('bud/Bud.Core/src/main/cs/IBuild.cs') %>
 ```
  
 In your `Build` class, you can modify the `settings` instance by calling its `Add` methods.
@@ -50,7 +50,7 @@ In your `Build` class, you can modify the `settings` instance by calling its `Ad
 __Here's an example of a `.bud/Build.cs` file__:
 
 ```language-csharp
-<%= snippet('bud/SystemTests/src/test/budProjects/SimpleProjectTest/.bud/Build.cs') %>
+<%= snippet('bud/Bud.SystemTests/src/test/budProjects/SimpleProjectTest/.bud/Build.cs') %>
 ```
 
 Note that the `Settings` class is immutable. Every call to `Add` methods returns a new instance of the `Settings` class.
@@ -203,7 +203,7 @@ you must place `Cs.Dependency("Foo.Bar")` into
 the project's desired build target. Here's an example of a project with a dependency:
 
 ```language-csharp
-<%= snippet('bud/SystemTests/src/test/budProjects/ExternalDependenciesTest/.bud/Build.cs') %>
+<%= snippet('bud/Bud.SystemTests/src/test/budProjects/ExternalDependenciesTest/.bud/Build.cs') %>
 
 ```
 
@@ -223,7 +223,7 @@ To use the plugin `Bud.Examples.HelloWorldPlugin` in your build do the following
 1. create the file `.bud/.bud/Build.cs` with the following contents:
 
     ```language-csharp
-   <%= snippet('bud/SystemTests/src/test/budProjects/BuildLevels/.bud/.bud/Build.cs', indent: 3) %>
+   <%= snippet('bud/Bud.SystemTests/src/test/budProjects/BuildLevels/.bud/.bud/Build.cs', indent: 3) %>
     ```
     
     This will make sure Bud downloads the plugin and makes it available to your
@@ -232,7 +232,7 @@ To use the plugin `Bud.Examples.HelloWorldPlugin` in your build do the following
 2. Edit the build definition in `.bud/Build.cs`:
 
     ```language-csharp
-   <%= snippet('bud/SystemTests/src/test/budProjects/BuildLevels/.bud/Build.cs', indent: 3) %>
+   <%= snippet('bud/Bud.SystemTests/src/test/budProjects/BuildLevels/.bud/Build.cs', indent: 3) %>
     ```
 
 3. Now you can invoke `bud helloWorld`.
@@ -254,3 +254,29 @@ Please use the following plugins as a reference source:
 
 1. [Hello world plugin](https://github.com/urbas/Bud.Examples.HelloWorldPlugin)
 
+
+
+<a name="Macros"></a>
+## Macros
+
+Invoking a macro with a given name:
+
+```language-bash
+bud @macroName param1 param2 ... paramN
+```
+
+Listing all available macros:
+
+```language-bash
+bud -jq macros
+```
+
+### Writing a macro
+
+Unlike tasks, can read command-line arguments, transform settings, and invoke tasks multiple times.
+
+Here are some examples on how to write macros:
+
+```language-csharp
+<%= snippet('bud/Bud.SystemTests/src/test/budProjects/MacroTest/.bud/Build.cs') %>
+```
